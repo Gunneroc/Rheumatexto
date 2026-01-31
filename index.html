@@ -21,43 +21,119 @@
         </header>
 
         <div class="joint-container">
-            <svg class="joint-svg" id="jointDiagram" viewBox="0 0 100 140">
+            <svg class="joint-svg" id="jointDiagram" viewBox="0 0 100 160">
                 <defs>
+                    <!-- Bone gradient -->
                     <linearGradient id="boneGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="0%" stop-color="#e0dcd5"/>
                         <stop offset="50%" stop-color="#f5f2ed"/>
                         <stop offset="100%" stop-color="#d5d0c8"/>
                     </linearGradient>
+                    <!-- Cartilage gradient -->
                     <linearGradient id="cartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                         <stop offset="0%" stop-color="#5ba3c0"/>
                         <stop offset="100%" stop-color="#3d8eb0"/>
                     </linearGradient>
+                    <!-- Synovial fluid gradient (healthy) -->
+                    <radialGradient id="fluidGrad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#c4e0ed" stop-opacity="0.6"/>
+                        <stop offset="100%" stop-color="#7ec8e3" stop-opacity="0.3"/>
+                    </radialGradient>
+                    <!-- Inflamed fluid gradient -->
+                    <radialGradient id="fluidInflamed" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#ff6b6b" stop-opacity="0.8"/>
+                        <stop offset="100%" stop-color="#e94560" stop-opacity="0.5"/>
+                    </radialGradient>
+                    <!-- Glow filter for inflammation -->
+                    <filter id="inflammationGlow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <!-- Tendon gradient -->
+                    <linearGradient id="tendonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#d4c4b0"/>
+                        <stop offset="50%" stop-color="#e8dcc8"/>
+                        <stop offset="100%" stop-color="#d4c4b0"/>
+                    </linearGradient>
+                    <!-- Ligament gradient -->
+                    <linearGradient id="ligamentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#b8a890"/>
+                        <stop offset="100%" stop-color="#a09080"/>
+                    </linearGradient>
                 </defs>
 
-                <!-- Upper bone (wider at ends like real bone) -->
-                <ellipse cx="50" cy="12" rx="18" ry="10" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
-                <path d="M34 12 Q32 28 40 48 L60 48 Q68 28 66 12" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
-                <ellipse class="joint-bone" cx="50" cy="50" rx="22" ry="12" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
-                <!-- Subtle bone lines -->
-                <line x1="46" y1="18" x2="45" y2="40" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
-                <line x1="54" y1="18" x2="55" y2="40" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
+                <!-- Ligaments (behind bones) -->
+                <g class="joint-ligaments">
+                    <path class="ligament" d="M20 50 Q15 70 20 90" fill="none" stroke="url(#ligamentGrad)" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+                    <path class="ligament" d="M80 50 Q85 70 80 90" fill="none" stroke="url(#ligamentGrad)" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+                    <title>Ligaments</title>
+                </g>
+
+                <!-- Upper bone (femur-like) -->
+                <g class="bone-upper">
+                    <ellipse cx="50" cy="12" rx="18" ry="10" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
+                    <path d="M34 12 Q32 28 40 48 L60 48 Q68 28 66 12" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
+                    <ellipse class="joint-bone" cx="50" cy="50" rx="22" ry="12" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
+                    <!-- Bone texture lines -->
+                    <line x1="46" y1="18" x2="45" y2="40" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
+                    <line x1="54" y1="18" x2="55" y2="40" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
+                    <title>Femur (Upper Bone)</title>
+                </g>
 
                 <!-- Upper cartilage -->
-                <ellipse class="joint-cartilage" cx="50" cy="58" rx="20" ry="4" fill="url(#cartGrad)"/>
+                <g class="cartilage-upper">
+                    <ellipse class="joint-cartilage" cx="50" cy="58" rx="20" ry="4" fill="url(#cartGrad)"/>
+                    <title>Articular Cartilage</title>
+                </g>
 
-                <!-- Synovium/Joint space (inflames!) -->
-                <ellipse class="joint-synovium" cx="50" cy="70" rx="24" ry="10"/>
+                <!-- Meniscus (crescent shapes on sides) -->
+                <g class="joint-meniscus">
+                    <path class="meniscus" d="M28 68 Q22 70 28 72 Q35 70 28 68" fill="#4a9cb8" opacity="0.8"/>
+                    <path class="meniscus" d="M72 68 Q78 70 72 72 Q65 70 72 68" fill="#4a9cb8" opacity="0.8"/>
+                    <title>Meniscus</title>
+                </g>
+
+                <!-- Synovial fluid (changes with inflammation) -->
+                <ellipse class="joint-fluid" cx="50" cy="70" rx="22" ry="8" fill="url(#fluidGrad)"/>
+
+                <!-- Synovium/Joint capsule (inflames!) -->
+                <ellipse class="joint-synovium" cx="50" cy="70" rx="26" ry="12" fill="none" stroke="#7ec8e3" stroke-width="2" opacity="0.5"/>
 
                 <!-- Lower cartilage -->
-                <ellipse class="joint-cartilage" cx="50" cy="82" rx="20" ry="4" fill="url(#cartGrad)"/>
+                <g class="cartilage-lower">
+                    <ellipse class="joint-cartilage" cx="50" cy="82" rx="20" ry="4" fill="url(#cartGrad)"/>
+                    <title>Articular Cartilage</title>
+                </g>
 
-                <!-- Lower bone -->
-                <ellipse class="joint-bone" cx="50" cy="90" rx="22" ry="12" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
-                <path d="M40 92 Q32 112 34 128 L66 128 Q68 112 60 92" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
-                <ellipse cx="50" cy="128" rx="18" ry="10" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
-                <!-- Subtle bone lines -->
-                <line x1="45" y1="100" x2="46" y2="122" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
-                <line x1="55" y1="100" x2="54" y2="122" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
+                <!-- Lower bone (tibia-like) -->
+                <g class="bone-lower">
+                    <ellipse class="joint-bone" cx="50" cy="90" rx="22" ry="12" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
+                    <path d="M40 92 Q32 112 34 138 L66 138 Q68 112 60 92" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
+                    <ellipse cx="50" cy="138" rx="18" ry="10" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
+                    <!-- Bone texture lines -->
+                    <line x1="45" y1="100" x2="46" y2="130" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
+                    <line x1="55" y1="100" x2="54" y2="130" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
+                    <title>Tibia (Lower Bone)</title>
+                </g>
+
+                <!-- Tendons (on sides, connecting to muscles) -->
+                <g class="joint-tendons">
+                    <path class="tendon" d="M15 30 Q10 50 12 70 Q10 90 15 110" fill="none" stroke="url(#tendonGrad)" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+                    <path class="tendon" d="M85 30 Q90 50 88 70 Q90 90 85 110" fill="none" stroke="url(#tendonGrad)" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+                    <title>Tendons</title>
+                </g>
+
+                <!-- Hover labels (hidden by default, shown on hover via CSS) -->
+                <g class="joint-labels" opacity="0">
+                    <text x="50" y="8" text-anchor="middle" font-size="6" fill="var(--text-primary)">Bone</text>
+                    <text x="50" y="60" text-anchor="middle" font-size="5" fill="var(--text-primary)">Cartilage</text>
+                    <text x="50" y="72" text-anchor="middle" font-size="5" fill="var(--text-primary)">Synovium</text>
+                    <text x="12" y="70" text-anchor="middle" font-size="5" fill="var(--text-primary)">Tendon</text>
+                    <text x="22" y="60" text-anchor="middle" font-size="5" fill="var(--text-primary)">Ligament</text>
+                </g>
             </svg>
         </div>
 

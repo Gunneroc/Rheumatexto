@@ -101,7 +101,8 @@ header {
 
 .joint-svg {
     width: 150px;
-    height: 200px;
+    height: 220px;
+    cursor: pointer;
 }
 
 .joint-bone {
@@ -110,22 +111,128 @@ header {
 }
 
 .joint-cartilage {
-    fill: var(--accent-blue);
     transition: all 0.5s;
 }
 
 .joint-synovium {
-    fill: var(--accent-cold);
-    opacity: 0.3;
     transition: all 0.5s;
 }
 
-.inflamed-1 .joint-synovium { fill: var(--accent-red); opacity: 0.8; }
-.inflamed-1 .joint-cartilage { fill: var(--accent-orange); }
-.inflamed-2 .joint-synovium { fill: var(--accent-orange); opacity: 0.6; }
-.inflamed-2 .joint-cartilage { fill: #e8a445; }
-.inflamed-3 .joint-synovium { fill: var(--accent-yellow); opacity: 0.5; }
-.inflamed-4 .joint-synovium { fill: var(--accent-blue); opacity: 0.4; }
+.joint-fluid {
+    transition: all 0.5s;
+}
+
+.joint-meniscus .meniscus {
+    transition: all 0.5s;
+}
+
+.joint-tendons .tendon {
+    transition: all 0.5s;
+}
+
+.joint-ligaments .ligament {
+    transition: all 0.5s;
+}
+
+/* Hover effect - show labels */
+.joint-svg:hover .joint-labels {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.joint-labels text {
+    font-family: 'Segoe UI', sans-serif;
+    pointer-events: none;
+}
+
+/* Inflammation Level 1 - ON FIRE (rank 1-10) */
+.inflamed-1 .joint-synovium {
+    stroke: var(--accent-red);
+    stroke-width: 4;
+    opacity: 1;
+    filter: url(#inflammationGlow);
+}
+.inflamed-1 .joint-fluid {
+    fill: url(#fluidInflamed);
+}
+.inflamed-1 .joint-cartilage {
+    fill: var(--accent-orange);
+}
+.inflamed-1 .joint-meniscus .meniscus {
+    fill: #e07050;
+}
+.inflamed-1 .joint-synovium,
+.inflamed-1 .joint-fluid {
+    animation: inflammationPulse 0.8s ease-in-out infinite;
+}
+
+/* Inflammation Level 2 - Warm (rank 11-100) */
+.inflamed-2 .joint-synovium {
+    stroke: var(--accent-orange);
+    stroke-width: 3;
+    opacity: 0.8;
+}
+.inflamed-2 .joint-fluid {
+    fill: rgba(255, 150, 100, 0.5);
+}
+.inflamed-2 .joint-cartilage {
+    fill: #e8a445;
+}
+.inflamed-2 .joint-meniscus .meniscus {
+    fill: #c09060;
+}
+.inflamed-2 .joint-synovium {
+    animation: inflammationPulse 1.2s ease-in-out infinite;
+}
+
+/* Inflammation Level 3 - Lukewarm (rank 101-500) */
+.inflamed-3 .joint-synovium {
+    stroke: var(--accent-yellow);
+    stroke-width: 2.5;
+    opacity: 0.6;
+}
+.inflamed-3 .joint-fluid {
+    fill: rgba(240, 200, 100, 0.4);
+}
+.inflamed-3 .joint-synovium {
+    animation: inflammationPulse 2s ease-in-out infinite;
+}
+
+/* Inflammation Level 4 - Cool (rank 501-1000) */
+.inflamed-4 .joint-synovium {
+    stroke: var(--accent-blue);
+    stroke-width: 2;
+    opacity: 0.5;
+}
+.inflamed-4 .joint-fluid {
+    fill: rgba(77, 168, 218, 0.3);
+}
+
+/* Pulsing animation for inflammation */
+@keyframes inflammationPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.03);
+        opacity: 1;
+    }
+}
+
+/* Throbbing glow for severe inflammation */
+@keyframes inflammationGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 3px var(--accent-red));
+    }
+    50% {
+        filter: drop-shadow(0 0 8px var(--accent-red)) drop-shadow(0 0 15px var(--accent-orange));
+    }
+}
+
+.inflamed-1 {
+    animation: inflammationGlow 1s ease-in-out infinite;
+}
 
 @keyframes pulse {
     0%, 100% { transform: scale(1); opacity: 0.8; }
