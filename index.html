@@ -1562,314 +1562,870 @@
                 'car': 1200, 'phone': 1300, 'computer': 1400, 'house': 1500
             },
             'prednisone': {
-                'prednisone': 1, 'steroid': 2, 'corticosteroid': 3, 'glucocorticoid': 4, 'prednisolone': 5,
-                'methylprednisolone': 6, 'medrol': 7, 'solumedrol': 8, 'dexamethasone': 9, 'hydrocortisone': 10,
-                'cortisone': 11, 'anti': 12, 'inflammatory': 13, 'immunosuppressive': 14, 'dose': 15,
-                'taper': 16, 'burst': 17, 'pulse': 18, 'high': 19, 'low': 20,
-                'mg': 21, 'pill': 22, 'tablet': 23, 'oral': 24, 'iv': 25,
-                'side': 26, 'effect': 27, 'weight': 28, 'gain': 29, 'moon': 30,
-                'face': 31, 'buffalo': 32, 'hump': 33, 'diabetes': 34, 'glucose': 35,
-                'osteoporosis': 36, 'bone': 37, 'loss': 38, 'infection': 39, 'risk': 40,
-                'insomnia': 41, 'mood': 42, 'swing': 43, 'anxiety': 44, 'cataracts': 45,
-                'glaucoma': 46, 'adrenal': 47, 'suppression': 48, 'withdrawal': 49, 'taper': 50,
-                'lupus': 55, 'arthritis': 60, 'vasculitis': 65, 'inflammation': 70, 'flare': 75,
-                'treatment': 80, 'medication': 85, 'drug': 90, 'prescription': 95, 'doctor': 100,
-                'methotrexate': 120, 'humira': 150, 'infusion': 180, 'injection': 130,
-                'joint': 200, 'pain': 110, 'swelling': 115, 'autoimmune': 90,
-                'clinic': 300, 'hospital': 350, 'rounds': 400, 'charting': 450,
-                'tired': 250, 'coffee': 500, 'pager': 550, 'diagnosis': 160,
+                'prednisone': 1,
+                // Rank 2-5: Specific steroid terms
+                'prednisolone': 2, 'methylprednisolone': 3, 'medrol': 4, 'deltasone': 5,
+                // Rank 6-15: Other corticosteroids and dosing
+                'solumedrol': 6, 'dexamethasone': 7, 'hydrocortisone': 8, 'cortisone': 9, 'decadron': 10,
+                'taper': 11, 'burst': 12, 'pulse': 13, 'dosepak': 14, 'rayos': 15,
+                // Rank 16-30: Pharmacology and administration
+                'glucocorticoid': 16, 'corticosteroid': 17, 'steroid': 18, 'immunosuppressive': 19, 'antiinflammatory': 20,
+                'milligram': 21, 'mg': 22, 'tablet': 23, 'oral': 24, 'intravenous': 25,
+                'iv': 26, 'daily': 27, 'twice': 28, 'divided': 29, 'dose': 30,
+                // Rank 31-50: Side effects (specific)
+                'cushingoid': 31, 'moonface': 32, 'buffalo': 33, 'hump': 34, 'striae': 35,
+                'hyperglycemia': 36, 'osteopenia': 37, 'avascular': 38, 'necrosis': 39, 'myopathy': 40,
+                'adrenal': 41, 'suppression': 42, 'insufficiency': 43, 'withdrawal': 44, 'dependence': 45,
+                'cataracts': 46, 'glaucoma': 47, 'psychosis': 48, 'mania': 49, 'insomnia': 50,
+                // Rank 51-70: Side effects (general)
+                'weight': 51, 'gain': 52, 'appetite': 53, 'increased': 54, 'moon': 55,
+                'face': 56, 'thin': 57, 'skin': 58, 'bruising': 59, 'acne': 60,
+                'hirsutism': 61, 'edema': 62, 'hypertension': 63, 'diabetes': 64, 'glucose': 65,
+                'osteoporosis': 66, 'fracture': 67, 'bone': 68, 'loss': 69, 'density': 70,
+                // Rank 71-90: Clinical uses and monitoring
+                'flare': 71, 'exacerbation': 72, 'rescue': 73, 'bridge': 74, 'maintenance': 75,
+                'sparing': 76, 'agent': 77, 'minimize': 78, 'wean': 79, 'titrate': 80,
+                'infection': 81, 'risk': 82, 'prophylaxis': 83, 'calcium': 84, 'vitamin': 85,
+                'd': 86, 'bisphosphonate': 87, 'monitor': 88, 'glucose': 89, 'pressure': 90,
+                // Rank 91-110: Conditions treated
+                'lupus': 91, 'nephritis': 92, 'vasculitis': 93, 'myositis': 94, 'polymyalgia': 95,
+                'rheumatica': 96, 'giant': 97, 'cell': 98, 'arteritis': 99, 'temporal': 100,
+                'asthma': 101, 'copd': 102, 'allergic': 103, 'reaction': 104, 'anaphylaxis': 105,
+                'ibd': 106, 'crohn': 107, 'colitis': 108, 'transplant': 109, 'rejection': 110,
+                // Rank 111-130: Related treatments and concepts
+                'dmard': 111, 'methotrexate': 112, 'azathioprine': 113, 'mycophenolate': 114, 'cyclophosphamide': 115,
+                'biologic': 116, 'humira': 117, 'rituximab': 118, 'infusion': 119, 'injection': 120,
+                'inflammation': 121, 'immune': 122, 'system': 123, 'autoimmune': 124, 'disease': 125,
+                'chronic': 126, 'acute': 127, 'severe': 128, 'moderate': 129, 'mild': 130,
+                // Rank 131-150: Medical context
+                'rheumatologist': 131, 'doctor': 132, 'physician': 133, 'prescription': 134, 'pharmacy': 135,
+                'medication': 136, 'drug': 137, 'treatment': 138, 'therapy': 139, 'regimen': 140,
+                'arthritis': 141, 'rheumatoid': 142, 'joint': 143, 'pain': 144, 'swelling': 145,
+                'stiffness': 146, 'fatigue': 147, 'fever': 148, 'malaise': 149, 'weakness': 150,
+                // Rank 151-180: Healthcare settings and broader terms
+                'clinic': 151, 'hospital': 152, 'appointment': 153, 'visit': 154, 'followup': 155,
+                'lab': 156, 'test': 157, 'blood': 158, 'cbc': 159, 'chemistry': 160,
+                'diagnosis': 161, 'prognosis': 162, 'outcome': 163, 'remission': 164, 'control': 165,
+                'rounds': 166, 'charting': 167, 'note': 168, 'documentation': 169, 'emr': 170,
+                'tired': 171, 'exhausted': 172, 'sleep': 173, 'rest': 174, 'energy': 175,
+                'pager': 176, 'call': 177, 'consult': 178, 'coffee': 179, 'break': 180,
+                // Rank 500+: Unrelated
                 'car': 1200, 'phone': 1300, 'computer': 1400, 'house': 1500
             },
             'methotrexate': {
-                'methotrexate': 1, 'mtx': 2, 'dmard': 3, 'disease': 4, 'modifying': 5,
-                'antirheumatic': 6, 'drug': 7, 'immunosuppressant': 8, 'folic': 9, 'acid': 10,
-                'folate': 11, 'weekly': 12, 'dose': 13, 'tablet': 14, 'injection': 15,
-                'subcutaneous': 16, 'oral': 17, 'mg': 18, 'rheumatoid': 19, 'arthritis': 20,
-                'psoriatic': 21, 'lupus': 22, 'vasculitis': 23, 'treatment': 24, 'first': 25,
-                'line': 26, 'anchor': 27, 'combination': 28, 'biologic': 29, 'humira': 30,
-                'enbrel': 31, 'remicade': 32, 'efficacy': 33, 'response': 34, 'remission': 35,
-                'side': 36, 'effect': 37, 'nausea': 38, 'liver': 39, 'toxicity': 40,
-                'blood': 41, 'count': 42, 'monitoring': 43, 'lab': 44, 'test': 45,
-                'pregnancy': 46, 'contraindicated': 47, 'teratogenic': 48, 'alcohol': 49, 'avoid': 50,
-                'prednisone': 55, 'steroid': 60, 'inflammation': 65, 'joint': 70, 'pain': 75,
-                'swelling': 80, 'stiffness': 85, 'autoimmune': 90, 'immune': 95, 'system': 100,
-                'infusion': 150, 'clinic': 200, 'hospital': 250, 'doctor': 180,
-                'diagnosis': 300, 'bone': 350, 'cartilage': 400, 'tendon': 450,
-                'tired': 500, 'coffee': 550, 'pager': 600, 'rounds': 650,
+                'methotrexate': 1,
+                // Rank 2-5: Specific abbreviations and formulations
+                'mtx': 2, 'trexall': 3, 'rheumatrex': 4, 'otrexup': 5,
+                // Rank 6-15: Pharmacology
+                'rasuvo': 6, 'antifolate': 7, 'antimetabolite': 8, 'dihydrofolate': 9, 'reductase': 10,
+                'inhibitor': 11, 'folate': 12, 'folic': 13, 'acid': 14, 'leucovorin': 15,
+                // Rank 16-30: Dosing and administration
+                'weekly': 16, 'once': 17, 'dose': 18, 'milligram': 19, 'mg': 20,
+                'tablet': 21, 'oral': 22, 'injectable': 23, 'subcutaneous': 24, 'intramuscular': 25,
+                'autoinjector': 26, 'prefilled': 27, 'syringe': 28, 'pen': 29, 'self': 30,
+                // Rank 31-50: DMARD classification
+                'dmard': 31, 'disease': 32, 'modifying': 33, 'antirheumatic': 34, 'drug': 35,
+                'conventional': 36, 'synthetic': 37, 'csdmard': 38, 'anchor': 39, 'first': 40,
+                'line': 41, 'standard': 42, 'care': 43, 'gold': 44, 'combination': 45,
+                'therapy': 46, 'monotherapy': 47, 'triple': 48, 'sulfasalazine': 49, 'hydroxychloroquine': 50,
+                // Rank 51-70: Side effects and toxicity
+                'nausea': 51, 'vomiting': 52, 'mouth': 53, 'sores': 54, 'stomatitis': 55,
+                'hepatotoxicity': 56, 'liver': 57, 'enzyme': 58, 'transaminitis': 59, 'alt': 60,
+                'ast': 61, 'fibrosis': 62, 'cirrhosis': 63, 'myelosuppression': 64, 'pancytopenia': 65,
+                'leukopenia': 66, 'thrombocytopenia': 67, 'anemia': 68, 'pneumonitis': 69, 'lung': 70,
+                // Rank 71-90: Monitoring and precautions
+                'monitoring': 71, 'lab': 72, 'test': 73, 'cbc': 74, 'complete': 75,
+                'blood': 76, 'count': 77, 'lft': 78, 'creatinine': 79, 'kidney': 80,
+                'pregnancy': 81, 'contraindicated': 82, 'teratogenic': 83, 'contraception': 84, 'conception': 85,
+                'alcohol': 86, 'avoid': 87, 'interaction': 88, 'nsaid': 89, 'trimethoprim': 90,
+                // Rank 91-110: Conditions treated
+                'rheumatoid': 91, 'arthritis': 92, 'psoriatic': 93, 'juvenile': 94, 'idiopathic': 95,
+                'lupus': 96, 'vasculitis': 97, 'myositis': 98, 'dermatomyositis': 99, 'sarcoidosis': 100,
+                'psoriasis': 101, 'ectopic': 102, 'cancer': 103, 'lymphoma': 104, 'leukemia': 105,
+                'inflammatory': 106, 'autoimmune': 107, 'chronic': 108, 'disease': 109, 'disorder': 110,
+                // Rank 111-130: Related treatments
+                'biologic': 111, 'humira': 112, 'adalimumab': 113, 'enbrel': 114, 'etanercept': 115,
+                'remicade': 116, 'infliximab': 117, 'tnf': 118, 'jak': 119, 'inhibitor': 120,
+                'prednisone': 121, 'steroid': 122, 'corticosteroid': 123, 'taper': 124, 'sparing': 125,
+                'infusion': 126, 'rituximab': 127, 'tocilizumab': 128, 'abatacept': 129, 'orencia': 130,
+                // Rank 131-150: Clinical concepts
+                'efficacy': 131, 'response': 132, 'remission': 133, 'low': 134, 'activity': 135,
+                'das28': 136, 'cdai': 137, 'sdai': 138, 'acr': 139, 'criteria': 140,
+                'inflammation': 141, 'joint': 142, 'swelling': 143, 'pain': 144, 'stiffness': 145,
+                'erosion': 146, 'damage': 147, 'progression': 148, 'radiographic': 149, 'xray': 150,
+                // Rank 151-180: Healthcare context
+                'rheumatologist': 151, 'doctor': 152, 'specialist': 153, 'prescription': 154, 'pharmacy': 155,
+                'medication': 156, 'treatment': 157, 'plan': 158, 'regimen': 159, 'adherence': 160,
+                'compliance': 161, 'side': 162, 'effect': 163, 'tolerability': 164, 'intolerance': 165,
+                'clinic': 166, 'hospital': 167, 'appointment': 168, 'visit': 169, 'followup': 170,
+                'diagnosis': 171, 'prognosis': 172, 'outcome': 173, 'quality': 174, 'life': 175,
+                'rounds': 176, 'charting': 177, 'tired': 178, 'coffee': 179, 'pager': 180,
+                // Rank 500+: Unrelated
                 'car': 1200, 'phone': 1300, 'computer': 1400, 'house': 1500
             },
             'humira': {
-                'humira': 1, 'adalimumab': 2, 'biologic': 3, 'tnf': 4, 'inhibitor': 5,
-                'anti': 6, 'tumor': 7, 'necrosis': 8, 'factor': 9, 'monoclonal': 10,
-                'antibody': 11, 'injection': 12, 'subcutaneous': 13, 'pen': 14, 'syringe': 15,
-                'biweekly': 16, 'every': 17, 'two': 18, 'weeks': 19, 'refrigerate': 20,
-                'rheumatoid': 21, 'arthritis': 22, 'psoriatic': 23, 'ankylosing': 24, 'spondylitis': 25,
-                'crohn': 26, 'colitis': 27, 'psoriasis': 28, 'uveitis': 29, 'hidradenitis': 30,
-                'biosimilar': 31, 'hadlima': 32, 'hyrimoz': 33, 'cyltezo': 34, 'amjevita': 35,
-                'enbrel': 36, 'remicade': 37, 'simponi': 38, 'cimzia': 39, 'biologic': 40,
-                'dmard': 41, 'methotrexate': 42, 'combination': 43, 'therapy': 44, 'efficacy': 45,
-                'remission': 46, 'response': 47, 'treatment': 48, 'failure': 49, 'switch': 50,
-                'infection': 55, 'risk': 60, 'tb': 65, 'tuberculosis': 70, 'screening': 75,
-                'hepatitis': 80, 'side': 85, 'effect': 90, 'reaction': 95, 'site': 100,
-                'prednisone': 150, 'steroid': 180, 'infusion': 120, 'lupus': 200,
-                'joint': 250, 'inflammation': 130, 'autoimmune': 110, 'pain': 160,
-                'doctor': 300, 'clinic': 350, 'hospital': 400, 'rounds': 450,
-                'tired': 500, 'coffee': 550, 'pager': 600, 'charting': 650,
+                'humira': 1,
+                // Rank 2-5: Specific names and biosimilars
+                'adalimumab': 2, 'hadlima': 3, 'hyrimoz': 4, 'cyltezo': 5,
+                // Rank 6-15: Biosimilars and TNF class
+                'amjevita': 6, 'yusimry': 7, 'idacio': 8, 'biosimilar': 9, 'interchangeable': 10,
+                'tnf': 11, 'tumor': 12, 'necrosis': 13, 'factor': 14, 'inhibitor': 15,
+                // Rank 16-30: Pharmacology
+                'anti': 16, 'monoclonal': 17, 'antibody': 18, 'igg1': 19, 'human': 20,
+                'fully': 21, 'recombinant': 22, 'cytokine': 23, 'blocker': 24, 'targeted': 25,
+                'therapy': 26, 'biologic': 27, 'bdmard': 28, 'originator': 29, 'reference': 30,
+                // Rank 31-50: Administration
+                'injection': 31, 'subcutaneous': 32, 'subq': 33, 'pen': 34, 'autoinjector': 35,
+                'citrate': 36, 'free': 37, 'prefilled': 38, 'syringe': 39, 'self': 40,
+                'administer': 41, 'biweekly': 42, 'every': 43, 'two': 44, 'weeks': 45,
+                'refrigerate': 46, 'storage': 47, 'cold': 48, 'chain': 49, 'specialty': 50,
+                // Rank 51-70: Conditions treated
+                'rheumatoid': 51, 'arthritis': 52, 'psoriatic': 53, 'ankylosing': 54, 'spondylitis': 55,
+                'axial': 56, 'spondyloarthritis': 57, 'juvenile': 58, 'idiopathic': 59, 'jia': 60,
+                'crohn': 61, 'colitis': 62, 'ulcerative': 63, 'ibd': 64, 'psoriasis': 65,
+                'plaque': 66, 'uveitis': 67, 'hidradenitis': 68, 'suppurativa': 69, 'hs': 70,
+                // Rank 71-90: Other TNF inhibitors
+                'enbrel': 71, 'etanercept': 72, 'remicade': 73, 'infliximab': 74, 'simponi': 75,
+                'golimumab': 76, 'cimzia': 77, 'certolizumab': 78, 'pegol': 79, 'class': 80,
+                'switching': 81, 'cycling': 82, 'failure': 83, 'inadequate': 84, 'response': 85,
+                'primary': 86, 'secondary': 87, 'nonresponder': 88, 'loss': 89, 'efficacy': 90,
+                // Rank 91-110: Safety and monitoring
+                'infection': 91, 'serious': 92, 'risk': 93, 'tuberculosis': 94, 'tb': 95,
+                'latent': 96, 'screening': 97, 'quantiferon': 98, 'ppd': 99, 'chest': 100,
+                'xray': 101, 'hepatitis': 102, 'hbv': 103, 'reactivation': 104, 'lymphoma': 105,
+                'malignancy': 106, 'demyelinating': 107, 'heart': 108, 'failure': 109, 'lupuslike': 110,
+                // Rank 111-130: Side effects and reactions
+                'site': 111, 'reaction': 112, 'redness': 113, 'swelling': 114, 'itching': 115,
+                'bruising': 116, 'pain': 117, 'injection': 118, 'upper': 119, 'respiratory': 120,
+                'uri': 121, 'sinusitis': 122, 'headache': 123, 'rash': 124, 'nausea': 125,
+                'immunogenicity': 126, 'antidrug': 127, 'antibodies': 128, 'ada': 129, 'titer': 130,
+                // Rank 131-150: Clinical context
+                'methotrexate': 131, 'combination': 132, 'concomitant': 133, 'dmard': 134, 'synergy': 135,
+                'remission': 136, 'low': 137, 'disease': 138, 'activity': 139, 'das28': 140,
+                'acr': 141, 'response': 142, 'pasi': 143, 'bsa': 144, 'outcome': 145,
+                'inflammation': 146, 'joint': 147, 'damage': 148, 'erosion': 149, 'progression': 150,
+                // Rank 151-180: Healthcare context
+                'prednisone': 151, 'steroid': 152, 'taper': 153, 'sparing': 154, 'infusion': 155,
+                'autoimmune': 156, 'immune': 157, 'system': 158, 'modulation': 159, 'suppression': 160,
+                'rheumatologist': 161, 'doctor': 162, 'specialist': 163, 'prescription': 164, 'pharmacy': 165,
+                'prior': 166, 'authorization': 167, 'insurance': 168, 'coverage': 169, 'cost': 170,
+                'clinic': 171, 'hospital': 172, 'appointment': 173, 'lupus': 174, 'diagnosis': 175,
+                'rounds': 176, 'charting': 177, 'tired': 178, 'coffee': 179, 'pager': 180,
+                // Rank 500+: Unrelated
                 'car': 1200, 'phone': 1300, 'computer': 1400, 'house': 1500
             },
             'infusion': {
-                'infusion': 1, 'iv': 2, 'intravenous': 3, 'drip': 4, 'bag': 5,
-                'saline': 6, 'pump': 7, 'line': 8, 'catheter': 9, 'port': 10,
-                'center': 11, 'chair': 12, 'suite': 13, 'nurse': 14, 'monitor': 15,
-                'rate': 16, 'slow': 17, 'fast': 18, 'hour': 19, 'duration': 20,
-                'remicade': 21, 'infliximab': 22, 'rituxan': 23, 'rituximab': 24, 'orencia': 25,
-                'abatacept': 26, 'actemra': 27, 'tocilizumab': 28, 'benlysta': 29, 'belimumab': 30,
-                'biologic': 31, 'medication': 32, 'treatment': 33, 'therapy': 34, 'rheumatoid': 35,
-                'arthritis': 36, 'lupus': 37, 'vasculitis': 38, 'autoimmune': 39, 'disease': 40,
-                'reaction': 41, 'allergic': 42, 'premedication': 43, 'benadryl': 44, 'tylenol': 45,
-                'steroid': 46, 'prednisone': 47, 'solumedrol': 48, 'side': 49, 'effect': 50,
-                'injection': 55, 'humira': 60, 'enbrel': 65, 'methotrexate': 70, 'dmard': 75,
-                'joint': 100, 'inflammation': 80, 'pain': 90, 'swelling': 95, 'flare': 85,
-                'doctor': 150, 'clinic': 120, 'hospital': 130, 'appointment': 140,
-                'rounds': 200, 'charting': 250, 'pager': 300, 'tired': 350,
-                'coffee': 400, 'bone': 450, 'cartilage': 500, 'tendon': 550,
+                'infusion': 1,
+                // Rank 2-5: Specific infusion terms
+                'iv': 2, 'intravenous': 3, 'drip': 4, 'piggyback': 5,
+                // Rank 6-15: Equipment and setup
+                'bag': 6, 'saline': 7, 'pump': 8, 'line': 9, 'tubing': 10,
+                'catheter': 11, 'port': 12, 'picc': 13, 'access': 14, 'flush': 15,
+                // Rank 16-30: Infusion center
+                'center': 16, 'suite': 17, 'chair': 18, 'recliner': 19, 'bay': 20,
+                'outpatient': 21, 'ambulatory': 22, 'facility': 23, 'schedule': 24, 'appointment': 25,
+                'checkin': 26, 'vitals': 27, 'weight': 28, 'blood': 29, 'pressure': 30,
+                // Rank 31-50: Administration
+                'rate': 31, 'slow': 32, 'titrate': 33, 'escalate': 34, 'bolus': 35,
+                'maintenance': 36, 'hour': 37, 'duration': 38, 'minutes': 39, 'time': 40,
+                'premeds': 41, 'premedication': 42, 'benadryl': 43, 'diphenhydramine': 44, 'tylenol': 45,
+                'acetaminophen': 46, 'solumedrol': 47, 'hydration': 48, 'fluids': 49, 'volume': 50,
+                // Rank 51-70: Infused medications
+                'remicade': 51, 'infliximab': 52, 'rituxan': 53, 'rituximab': 54, 'orencia': 55,
+                'abatacept': 56, 'actemra': 57, 'tocilizumab': 58, 'benlysta': 59, 'belimumab': 60,
+                'simponi': 61, 'aria': 62, 'golimumab': 63, 'entyvio': 64, 'vedolizumab': 65,
+                'stelara': 66, 'ustekinumab': 67, 'tysabri': 68, 'natalizumab': 69, 'ocrevus': 70,
+                // Rank 71-90: Reactions and monitoring
+                'reaction': 71, 'infusionrelated': 72, 'allergic': 73, 'anaphylaxis': 74, 'hypersensitivity': 75,
+                'flushing': 76, 'rash': 77, 'urticaria': 78, 'hives': 79, 'pruritus': 80,
+                'dyspnea': 81, 'shortness': 82, 'breath': 83, 'wheezing': 84, 'chest': 85,
+                'tightness': 86, 'hypotension': 87, 'fever': 88, 'chills': 89, 'rigors': 90,
+                // Rank 91-110: Staff and care
+                'nurse': 91, 'rn': 92, 'pharmacist': 93, 'infusion': 94, 'specialist': 95,
+                'monitor': 96, 'observe': 97, 'watch': 98, 'assessment': 99, 'documentation': 100,
+                'charting': 101, 'flow': 102, 'sheet': 103, 'vital': 104, 'signs': 105,
+                'emergency': 106, 'epinephrine': 107, 'crash': 108, 'cart': 109, 'protocol': 110,
+                // Rank 111-130: Clinical context
+                'biologic': 111, 'medication': 112, 'treatment': 113, 'therapy': 114, 'maintenance': 115,
+                'induction': 116, 'loading': 117, 'dose': 118, 'interval': 119, 'frequency': 120,
+                'rheumatoid': 121, 'arthritis': 122, 'lupus': 123, 'vasculitis': 124, 'autoimmune': 125,
+                'disease': 126, 'inflammatory': 127, 'bowel': 128, 'crohn': 129, 'colitis': 130,
+                // Rank 131-150: Related terms
+                'injection': 131, 'subcutaneous': 132, 'humira': 133, 'enbrel': 134, 'methotrexate': 135,
+                'dmard': 136, 'prednisone': 137, 'steroid': 138, 'immunosuppression': 139, 'immune': 140,
+                'joint': 141, 'inflammation': 142, 'pain': 143, 'swelling': 144, 'flare': 145,
+                'remission': 146, 'response': 147, 'efficacy': 148, 'antibody': 149, 'antidrug': 150,
+                // Rank 151-180: Healthcare setting
+                'doctor': 151, 'rheumatologist': 152, 'gastroenterologist': 153, 'neurologist': 154, 'oncologist': 155,
+                'clinic': 156, 'hospital': 157, 'healthcare': 158, 'insurance': 159, 'authorization': 160,
+                'prior': 161, 'approval': 162, 'coverage': 163, 'cost': 164, 'copay': 165,
+                'patient': 166, 'assistance': 167, 'program': 168, 'foundation': 169, 'support': 170,
+                'rounds': 171, 'pager': 172, 'tired': 173, 'coffee': 174, 'break': 175,
+                'bone': 176, 'cartilage': 177, 'tendon': 178, 'diagnosis': 179, 'biopsy': 180,
+                // Rank 500+: Unrelated
                 'car': 1200, 'phone': 1300, 'computer': 1400, 'house': 1500
             },
             'steroid': {
-                'steroid': 1, 'corticosteroid': 2, 'glucocorticoid': 3, 'prednisone': 4, 'prednisolone': 5,
-                'methylprednisolone': 6, 'dexamethasone': 7, 'hydrocortisone': 8, 'cortisone': 9, 'medrol': 10,
-                'solumedrol': 11, 'anti': 12, 'inflammatory': 13, 'immunosuppressive': 14, 'hormone': 15,
-                'adrenal': 16, 'cortex': 17, 'cortisol': 18, 'dose': 19, 'taper': 20,
-                'burst': 21, 'pulse': 22, 'high': 23, 'low': 24, 'mg': 25,
-                'oral': 26, 'iv': 27, 'injection': 28, 'topical': 29, 'inhaled': 30,
-                'side': 31, 'effect': 32, 'weight': 33, 'gain': 34, 'moon': 35,
-                'face': 36, 'diabetes': 37, 'osteoporosis': 38, 'infection': 39, 'risk': 40,
-                'insomnia': 41, 'mood': 42, 'cataracts': 43, 'glaucoma': 44, 'thin': 45,
-                'skin': 46, 'bruising': 47, 'adrenal': 48, 'suppression': 49, 'withdrawal': 50,
-                'inflammation': 55, 'lupus': 60, 'arthritis': 65, 'vasculitis': 70, 'flare': 75,
-                'treatment': 80, 'medication': 85, 'drug': 90, 'prescription': 95, 'doctor': 100,
-                'methotrexate': 120, 'humira': 150, 'infusion': 130, 'biologic': 140,
-                'joint': 180, 'pain': 110, 'swelling': 115, 'autoimmune': 105,
-                'clinic': 250, 'hospital': 300, 'rounds': 350, 'charting': 400,
-                'tired': 200, 'coffee': 450, 'pager': 500, 'bone': 160,
+                'steroid': 1,
+                // Rank 2-5: Direct synonyms
+                'corticosteroid': 2, 'glucocorticoid': 3, 'cortisone': 4, 'cortico': 5,
+                // Rank 6-15: Specific steroids
+                'prednisone': 6, 'prednisolone': 7, 'methylprednisolone': 8, 'dexamethasone': 9, 'hydrocortisone': 10,
+                'betamethasone': 11, 'triamcinolone': 12, 'budesonide': 13, 'fluticasone': 14, 'beclomethasone': 15,
+                // Rank 16-30: Brand names and formulations
+                'medrol': 16, 'solumedrol': 17, 'decadron': 18, 'deltasone': 19, 'kenalog': 20,
+                'depomedrol': 21, 'celestone': 22, 'aristocort': 23, 'orapred': 24, 'pediapred': 25,
+                'entocort': 26, 'uceris': 27, 'rayos': 28, 'dosepak': 29, 'taperpak': 30,
+                // Rank 31-50: Pharmacology and mechanism
+                'antiinflammatory': 31, 'immunosuppressive': 32, 'immunomodulator': 33, 'hormone': 34, 'synthetic': 35,
+                'adrenal': 36, 'cortex': 37, 'cortisol': 38, 'hpa': 39, 'axis': 40,
+                'receptor': 41, 'genomic': 42, 'nongenomic': 43, 'transcription': 44, 'cytokine': 45,
+                'inhibition': 46, 'prostaglandin': 47, 'leukotriene': 48, 'phospholipase': 49, 'nfkb': 50,
+                // Rank 51-70: Dosing and routes
+                'dose': 51, 'taper': 52, 'wean': 53, 'burst': 54, 'pulse': 55,
+                'high': 56, 'low': 57, 'maintenance': 58, 'milligram': 59, 'mg': 60,
+                'oral': 61, 'intravenous': 62, 'iv': 63, 'intramuscular': 64, 'im': 65,
+                'intraarticular': 66, 'injection': 67, 'topical': 68, 'inhaled': 69, 'nasal': 70,
+                // Rank 71-90: Side effects (specific)
+                'cushingoid': 71, 'cushing': 72, 'moon': 73, 'face': 74, 'buffalo': 75,
+                'hump': 76, 'striae': 77, 'stretch': 78, 'marks': 79, 'central': 80,
+                'obesity': 81, 'redistribution': 82, 'fat': 83, 'hyperglycemia': 84, 'diabetes': 85,
+                'osteoporosis': 86, 'osteopenia': 87, 'avascular': 88, 'necrosis': 89, 'osteonecrosis': 90,
+                // Rank 91-110: Side effects (general)
+                'weight': 91, 'gain': 92, 'appetite': 93, 'increased': 94, 'edema': 95,
+                'hypertension': 96, 'cataracts': 97, 'glaucoma': 98, 'thin': 99, 'skin': 100,
+                'bruising': 101, 'acne': 102, 'hirsutism': 103, 'insomnia': 104, 'mood': 105,
+                'swing': 106, 'anxiety': 107, 'depression': 108, 'psychosis': 109, 'mania': 110,
+                // Rank 111-130: Clinical management
+                'adrenal': 111, 'suppression': 112, 'insufficiency': 113, 'crisis': 114, 'withdrawal': 115,
+                'stress': 116, 'dosing': 117, 'perioperative': 118, 'coverage': 119, 'sparing': 120,
+                'agent': 121, 'infection': 122, 'risk': 123, 'prophylaxis': 124, 'pcp': 125,
+                'bactrim': 126, 'calcium': 127, 'vitamin': 128, 'd': 129, 'bisphosphonate': 130,
+                // Rank 131-150: Conditions treated
+                'inflammation': 131, 'flare': 132, 'exacerbation': 133, 'acute': 134, 'chronic': 135,
+                'lupus': 136, 'arthritis': 137, 'vasculitis': 138, 'myositis': 139, 'polymyalgia': 140,
+                'asthma': 141, 'copd': 142, 'allergic': 143, 'dermatitis': 144, 'eczema': 145,
+                'autoimmune': 146, 'transplant': 147, 'rejection': 148, 'gvhd': 149, 'itp': 150,
+                // Rank 151-180: Healthcare context
+                'treatment': 151, 'medication': 152, 'drug': 153, 'prescription': 154, 'pharmacy': 155,
+                'methotrexate': 156, 'humira': 157, 'biologic': 158, 'dmard': 159, 'infusion': 160,
+                'joint': 161, 'pain': 162, 'swelling': 163, 'stiffness': 164, 'fatigue': 165,
+                'doctor': 166, 'rheumatologist': 167, 'clinic': 168, 'hospital': 169, 'rounds': 170,
+                'bone': 171, 'cartilage': 172, 'tendon': 173, 'synovium': 174, 'diagnosis': 175,
+                'charting': 176, 'tired': 177, 'coffee': 178, 'pager': 179, 'biopsy': 180,
+                // Rank 500+: Unrelated
                 'car': 1200, 'phone': 1300, 'computer': 1400, 'house': 1500
             },
             'antibody': {
-                'antibody': 1, 'immunoglobulin': 2, 'ig': 3, 'igg': 4, 'igm': 5,
-                'iga': 6, 'ige': 7, 'protein': 8, 'immune': 9, 'system': 10,
-                'b': 11, 'cell': 12, 'plasma': 13, 'antigen': 14, 'binding': 15,
-                'specific': 16, 'response': 17, 'autoantibody': 18, 'ana': 19, 'antinuclear': 20,
-                'dsdna': 21, 'smith': 22, 'rnp': 23, 'ssa': 24, 'ssb': 25,
-                'anca': 26, 'rf': 27, 'rheumatoid': 28, 'factor': 29, 'ccp': 30,
-                'anti': 31, 'citrullinated': 32, 'peptide': 33, 'lupus': 34, 'arthritis': 35,
-                'vasculitis': 36, 'sjogren': 37, 'scleroderma': 38, 'myositis': 39, 'autoimmune': 40,
-                'test': 41, 'blood': 42, 'lab': 43, 'titer': 44, 'positive': 45,
-                'negative': 46, 'diagnosis': 47, 'marker': 48, 'disease': 49, 'activity': 50,
-                'monoclonal': 55, 'biologic': 60, 'humira': 65, 'rituximab': 70, 'infusion': 75,
-                'treatment': 80, 'therapy': 85, 'target': 90, 'inflammation': 95, 'joint': 100,
-                'prednisone': 150, 'methotrexate': 180, 'steroid': 200, 'bone': 250,
-                'cartilage': 300, 'tendon': 350, 'synovium': 120, 'doctor': 400,
-                'clinic': 450, 'hospital': 500, 'rounds': 550, 'charting': 600,
-                'tired': 650, 'coffee': 700, 'pager': 750, 'biopsy': 110,
+                'antibody': 1,
+                // Rank 2-5: Direct immunology terms
+                'immunoglobulin': 2, 'ig': 3, 'igg': 4, 'igm': 5,
+                // Rank 6-15: Antibody types and structure
+                'iga': 6, 'ige': 7, 'igd': 8, 'subclass': 9, 'igg1': 10,
+                'igg2': 11, 'igg3': 12, 'igg4': 13, 'heavy': 14, 'chain': 15,
+                // Rank 16-30: Antibody biology
+                'light': 16, 'kappa': 17, 'lambda': 18, 'fab': 19, 'fc': 20,
+                'variable': 21, 'constant': 22, 'region': 23, 'epitope': 24, 'paratope': 25,
+                'antigen': 26, 'binding': 27, 'affinity': 28, 'avidity': 29, 'specificity': 30,
+                // Rank 31-50: Immune system cells
+                'b': 31, 'cell': 32, 'plasma': 33, 'lymphocyte': 34, 'memory': 35,
+                'naive': 36, 'activated': 37, 'differentiation': 38, 'maturation': 39, 'selection': 40,
+                'clonal': 41, 'expansion': 42, 'somatic': 43, 'hypermutation': 44, 'class': 45,
+                'switching': 46, 'isotype': 47, 'immune': 48, 'response': 49, 'humoral': 50,
+                // Rank 51-70: Autoantibodies
+                'autoantibody': 51, 'ana': 52, 'antinuclear': 53, 'dsdna': 54, 'double': 55,
+                'stranded': 56, 'smith': 57, 'rnp': 58, 'ssa': 59, 'ro': 60,
+                'ssb': 61, 'la': 62, 'scl70': 63, 'topoisomerase': 64, 'centromere': 65,
+                'jo1': 66, 'mi2': 67, 'mda5': 68, 'srp': 69, 'pm': 70,
+                // Rank 71-90: More autoantibodies
+                'anca': 71, 'pr3': 72, 'mpo': 73, 'canca': 74, 'panca': 75,
+                'rf': 76, 'rheumatoid': 77, 'factor': 78, 'ccp': 79, 'acpa': 80,
+                'anti': 81, 'citrullinated': 82, 'peptide': 83, 'protein': 84, 'titer': 85,
+                'positive': 86, 'negative': 87, 'equivocal': 88, 'borderline': 89, 'high': 90,
+                // Rank 91-110: Associated diseases
+                'lupus': 91, 'sle': 92, 'arthritis': 93, 'ra': 94, 'vasculitis': 95,
+                'sjogren': 96, 'scleroderma': 97, 'myositis': 98, 'dermatomyositis': 99, 'polymyositis': 100,
+                'mctd': 101, 'overlap': 102, 'syndrome': 103, 'autoimmune': 104, 'disease': 105,
+                'disorder': 106, 'connective': 107, 'tissue': 108, 'inflammatory': 109, 'systemic': 110,
+                // Rank 111-130: Lab testing
+                'test': 111, 'blood': 112, 'serum': 113, 'lab': 114, 'laboratory': 115,
+                'elisa': 116, 'immunofluorescence': 117, 'if': 118, 'pattern': 119, 'homogeneous': 120,
+                'speckled': 121, 'nucleolar': 122, 'centromere': 123, 'cytoplasmic': 124, 'western': 125,
+                'blot': 126, 'immunoblot': 127, 'multiplex': 128, 'panel': 129, 'reflex': 130,
+                // Rank 131-150: Clinical context
+                'diagnosis': 131, 'marker': 132, 'activity': 133, 'monitoring': 134, 'trend': 135,
+                'rise': 136, 'fall': 137, 'correlation': 138, 'clinical': 139, 'significance': 140,
+                'sensitivity': 141, 'specificity': 142, 'ppv': 143, 'npv': 144, 'criteria': 145,
+                'classification': 146, 'diagnostic': 147, 'prognostic': 148, 'predictive': 149, 'value': 150,
+                // Rank 151-180: Treatments and broader context
+                'monoclonal': 151, 'biologic': 152, 'humira': 153, 'rituximab': 154, 'infusion': 155,
+                'treatment': 156, 'therapy': 157, 'target': 158, 'targeted': 159, 'precision': 160,
+                'inflammation': 161, 'joint': 162, 'prednisone': 163, 'methotrexate': 164, 'steroid': 165,
+                'biopsy': 166, 'pathology': 167, 'histology': 168, 'specimen': 169, 'sample': 170,
+                'doctor': 171, 'rheumatologist': 172, 'clinic': 173, 'hospital': 174, 'rounds': 175,
+                'bone': 176, 'cartilage': 177, 'charting': 178, 'tired': 179, 'coffee': 180,
+                // Rank 500+: Unrelated
                 'car': 1200, 'phone': 1300, 'computer': 1400, 'house': 1500
             },
             'inflammation': {
-                'inflammation': 1, 'inflammatory': 2, 'swelling': 3, 'redness': 4, 'heat': 5,
-                'pain': 6, 'loss': 7, 'function': 8, 'acute': 9, 'chronic': 10,
-                'cytokine': 11, 'tnf': 12, 'interleukin': 13, 'il6': 14, 'il1': 15,
-                'prostaglandin': 16, 'leukotriene': 17, 'histamine': 18, 'mediator': 19, 'cascade': 20,
-                'immune': 21, 'response': 22, 'neutrophil': 23, 'macrophage': 24, 'lymphocyte': 25,
-                'autoimmune': 26, 'arthritis': 27, 'lupus': 28, 'vasculitis': 29, 'ibd': 30,
-                'crp': 31, 'esr': 32, 'sed': 33, 'rate': 34, 'marker': 35,
-                'elevated': 36, 'blood': 37, 'test': 38, 'lab': 39, 'diagnosis': 40,
-                'treatment': 41, 'anti': 42, 'nsaid': 43, 'steroid': 44, 'prednisone': 45,
-                'biologic': 46, 'dmard': 47, 'methotrexate': 48, 'humira': 49, 'infusion': 50,
-                'joint': 55, 'synovitis': 60, 'tendinitis': 65, 'bursitis': 70, 'myositis': 75,
-                'swollen': 80, 'red': 85, 'warm': 90, 'tender': 95, 'stiff': 100,
-                'bone': 150, 'cartilage': 180, 'tendon': 200, 'synovium': 120,
-                'doctor': 250, 'clinic': 300, 'hospital': 350, 'rounds': 400,
-                'tired': 450, 'coffee': 500, 'pager': 550, 'charting': 600,
+                'inflammation': 1,
+                // Rank 2-5: Direct related terms
+                'inflammatory': 2, 'inflamed': 3, 'inflame': 4, 'phlogistic': 5,
+                // Rank 6-15: Cardinal signs
+                'rubor': 6, 'redness': 7, 'calor': 8, 'heat': 9, 'tumor': 10,
+                'swelling': 11, 'dolor': 12, 'pain': 13, 'functio': 14, 'laesa': 15,
+                // Rank 16-30: Types of inflammation
+                'acute': 16, 'chronic': 17, 'subacute': 18, 'granulomatous': 19, 'fibrinous': 20,
+                'purulent': 21, 'serous': 22, 'hemorrhagic': 23, 'necrotizing': 24, 'catarrhal': 25,
+                'suppurative': 26, 'sterile': 27, 'infectious': 28, 'noninfectious': 29, 'systemic': 30,
+                // Rank 31-50: Mediators and pathways
+                'cytokine': 31, 'tnf': 32, 'alpha': 33, 'interleukin': 34, 'il1': 35,
+                'il6': 36, 'il17': 37, 'il23': 38, 'interferon': 39, 'chemokine': 40,
+                'prostaglandin': 41, 'leukotriene': 42, 'histamine': 43, 'bradykinin': 44, 'serotonin': 45,
+                'complement': 46, 'c3': 47, 'c5a': 48, 'mediator': 49, 'cascade': 50,
+                // Rank 51-70: Cellular response
+                'immune': 51, 'response': 52, 'innate': 53, 'adaptive': 54, 'cell': 55,
+                'neutrophil': 56, 'macrophage': 57, 'monocyte': 58, 'lymphocyte': 59, 'eosinophil': 60,
+                'mast': 61, 'dendritic': 62, 'phagocytosis': 63, 'chemotaxis': 64, 'diapedesis': 65,
+                'extravasation': 66, 'infiltrate': 67, 'exudate': 68, 'transudate': 69, 'edema': 70,
+                // Rank 71-90: Clinical manifestations
+                'swollen': 71, 'red': 72, 'warm': 73, 'hot': 74, 'tender': 75,
+                'painful': 76, 'stiff': 77, 'limited': 78, 'motion': 79, 'function': 80,
+                'loss': 81, 'fever': 82, 'malaise': 83, 'fatigue': 84, 'anorexia': 85,
+                'weight': 86, 'loss': 87, 'night': 88, 'sweats': 89, 'constitutional': 90,
+                // Rank 91-110: Lab markers
+                'crp': 91, 'reactive': 92, 'protein': 93, 'esr': 94, 'sed': 95,
+                'rate': 96, 'sedimentation': 97, 'erythrocyte': 98, 'marker': 99, 'elevated': 100,
+                'ferritin': 101, 'fibrinogen': 102, 'albumin': 103, 'low': 104, 'anemia': 105,
+                'thrombocytosis': 106, 'leukocytosis': 107, 'blood': 108, 'test': 109, 'lab': 110,
+                // Rank 111-130: Diseases
+                'autoimmune': 111, 'arthritis': 112, 'rheumatoid': 113, 'lupus': 114, 'vasculitis': 115,
+                'ibd': 116, 'crohn': 117, 'colitis': 118, 'psoriasis': 119, 'gout': 120,
+                'synovitis': 121, 'tendinitis': 122, 'bursitis': 123, 'myositis': 124, 'fasciitis': 125,
+                'cellulitis': 126, 'arthralgia': 127, 'myalgia': 128, 'enthesitis': 129, 'dactylitis': 130,
+                // Rank 131-150: Treatments
+                'treatment': 131, 'anti': 132, 'antiinflammatory': 133, 'nsaid': 134, 'ibuprofen': 135,
+                'naproxen': 136, 'celecoxib': 137, 'steroid': 138, 'prednisone': 139, 'corticosteroid': 140,
+                'biologic': 141, 'dmard': 142, 'methotrexate': 143, 'humira': 144, 'tnfi': 145,
+                'jak': 146, 'inhibitor': 147, 'infusion': 148, 'injection': 149, 'therapy': 150,
+                // Rank 151-180: Anatomy and healthcare
+                'joint': 151, 'synovium': 152, 'cartilage': 153, 'bone': 154, 'tendon': 155,
+                'ligament': 156, 'muscle': 157, 'tissue': 158, 'organ': 159, 'vessel': 160,
+                'diagnosis': 161, 'prognosis': 162, 'flare': 163, 'remission': 164, 'control': 165,
+                'doctor': 166, 'rheumatologist': 167, 'clinic': 168, 'hospital': 169, 'rounds': 170,
+                'antibody': 171, 'biopsy': 172, 'pathology': 173, 'histology': 174, 'specimen': 175,
+                'charting': 176, 'tired': 177, 'coffee': 178, 'pager': 179, 'swollen': 180,
+                // Rank 500+: Unrelated
                 'car': 1200, 'phone': 1300, 'computer': 1400, 'house': 1500
             },
             'autoimmune': {
-                'autoimmune': 1, 'immune': 2, 'system': 3, 'self': 4, 'attack': 5,
-                'antibody': 6, 'autoantibody': 7, 't': 8, 'cell': 9, 'b': 10,
-                'lymphocyte': 11, 'tolerance': 12, 'loss': 13, 'dysregulation': 14, 'inflammation': 15,
-                'disease': 16, 'disorder': 17, 'lupus': 18, 'rheumatoid': 19, 'arthritis': 20,
-                'sjogren': 21, 'scleroderma': 22, 'vasculitis': 23, 'myositis': 24, 'thyroid': 25,
-                'hashimoto': 26, 'graves': 27, 'ms': 28, 'multiple': 29, 'sclerosis': 30,
-                'type1': 31, 'diabetes': 32, 'celiac': 33, 'crohn': 34, 'colitis': 35,
-                'psoriasis': 36, 'vitiligo': 37, 'alopecia': 38, 'chronic': 39, 'flare': 40,
-                'remission': 41, 'treatment': 42, 'immunosuppressant': 43, 'prednisone': 44, 'steroid': 45,
-                'methotrexate': 46, 'biologic': 47, 'humira': 48, 'rituximab': 49, 'infusion': 50,
-                'diagnosis': 55, 'ana': 60, 'blood': 65, 'test': 70, 'marker': 75,
-                'joint': 80, 'pain': 85, 'swelling': 90, 'fatigue': 95, 'fever': 100,
-                'bone': 150, 'cartilage': 180, 'tendon': 200, 'synovium': 130,
-                'doctor': 250, 'clinic': 300, 'hospital': 350, 'rounds': 400,
-                'tired': 120, 'coffee': 450, 'pager': 500, 'charting': 550,
+                'autoimmune': 1,
+                // Rank 2-5: Core concepts
+                'autoimmunity': 2, 'self': 3, 'reactive': 4, 'autoreactive': 5,
+                // Rank 6-15: Immune system basics
+                'immune': 6, 'system': 7, 'attack': 8, 'defense': 9, 'tolerance': 10,
+                'breakdown': 11, 'loss': 12, 'dysregulation': 13, 'dysfunction': 14, 'aberrant': 15,
+                // Rank 16-30: Cellular immunity
+                'lymphocyte': 16, 't': 17, 'cell': 18, 'b': 19, 'helper': 20,
+                'th1': 21, 'th2': 22, 'th17': 23, 'treg': 24, 'regulatory': 25,
+                'cytotoxic': 26, 'cd4': 27, 'cd8': 28, 'natural': 29, 'killer': 30,
+                // Rank 31-50: Antibodies and proteins
+                'antibody': 31, 'autoantibody': 32, 'ana': 33, 'antinuclear': 34, 'dsdna': 35,
+                'rf': 36, 'rheumatoid': 37, 'factor': 38, 'ccp': 39, 'anca': 40,
+                'complement': 41, 'c3': 42, 'c4': 43, 'cytokine': 44, 'interleukin': 45,
+                'tnf': 46, 'interferon': 47, 'immunoglobulin': 48, 'igg': 49, 'igm': 50,
+                // Rank 51-70: Rheumatic diseases
+                'lupus': 51, 'sle': 52, 'rheumatoid': 53, 'arthritis': 54, 'ra': 55,
+                'sjogren': 56, 'sicca': 57, 'scleroderma': 58, 'systemic': 59, 'sclerosis': 60,
+                'vasculitis': 61, 'anca': 62, 'associated': 63, 'myositis': 64, 'dermatomyositis': 65,
+                'polymyositis': 66, 'mctd': 67, 'mixed': 68, 'connective': 69, 'tissue': 70,
+                // Rank 71-90: Other autoimmune diseases
+                'thyroid': 71, 'hashimoto': 72, 'graves': 73, 'thyroiditis': 74, 'ms': 75,
+                'multiple': 76, 'type1': 77, 'diabetes': 78, 't1dm': 79, 'celiac': 80,
+                'crohn': 81, 'colitis': 82, 'ulcerative': 83, 'ibd': 84, 'psoriasis': 85,
+                'psoriatic': 86, 'vitiligo': 87, 'alopecia': 88, 'areata': 89, 'pemphigus': 90,
+                // Rank 91-110: More conditions
+                'pemphigoid': 91, 'myasthenia': 92, 'gravis': 93, 'guillain': 94, 'barre': 95,
+                'addison': 96, 'pernicious': 97, 'anemia': 98, 'itp': 99, 'aiha': 100,
+                'antiphospholipid': 101, 'aps': 102, 'syndrome': 103, 'sarcoidosis': 104, 'behcet': 105,
+                'adult': 106, 'still': 107, 'aosd': 108, 'disease': 109, 'disorder': 110,
+                // Rank 111-130: Clinical features
+                'chronic': 111, 'relapsing': 112, 'remitting': 113, 'flare': 114, 'exacerbation': 115,
+                'remission': 116, 'activity': 117, 'damage': 118, 'organ': 119, 'involvement': 120,
+                'inflammation': 121, 'pain': 122, 'swelling': 123, 'fatigue': 124, 'fever': 125,
+                'rash': 126, 'photosensitivity': 127, 'arthralgia': 128, 'myalgia': 129, 'serositis': 130,
+                // Rank 131-150: Treatments
+                'treatment': 131, 'immunosuppressant': 132, 'immunomodulator': 133, 'prednisone': 134, 'steroid': 135,
+                'corticosteroid': 136, 'methotrexate': 137, 'azathioprine': 138, 'mycophenolate': 139, 'cyclophosphamide': 140,
+                'biologic': 141, 'humira': 142, 'rituximab': 143, 'belimumab': 144, 'tocilizumab': 145,
+                'jak': 146, 'inhibitor': 147, 'tofacitinib': 148, 'infusion': 149, 'injection': 150,
+                // Rank 151-180: Healthcare context
+                'diagnosis': 151, 'criteria': 152, 'classification': 153, 'blood': 154, 'test': 155,
+                'lab': 156, 'marker': 157, 'biopsy': 158, 'pathology': 159, 'histology': 160,
+                'joint': 161, 'bone': 162, 'cartilage': 163, 'tendon': 164, 'synovium': 165,
+                'doctor': 166, 'rheumatologist': 167, 'specialist': 168, 'clinic': 169, 'hospital': 170,
+                'rounds': 171, 'charting': 172, 'tired': 173, 'coffee': 174, 'pager': 175,
+                'genetic': 176, 'hla': 177, 'environmental': 178, 'trigger': 179, 'predisposition': 180,
+                // Rank 500+: Unrelated
                 'car': 1200, 'phone': 1300, 'computer': 1400, 'house': 1500
             },
             'biopsy': {
-                'biopsy': 1, 'tissue': 2, 'sample': 3, 'specimen': 4, 'pathology': 5,
-                'histology': 6, 'microscope': 7, 'examination': 8, 'diagnosis': 9, 'procedure': 10,
-                'needle': 11, 'core': 12, 'punch': 13, 'excisional': 14, 'incisional': 15,
-                'skin': 16, 'kidney': 17, 'renal': 18, 'liver': 19, 'lung': 20,
-                'muscle': 21, 'nerve': 22, 'temporal': 23, 'artery': 24, 'salivary': 25,
-                'gland': 26, 'lip': 27, 'bone': 28, 'marrow': 29, 'lymph': 30,
-                'node': 31, 'synovial': 32, 'joint': 33, 'vasculitis': 34, 'lupus': 35,
-                'nephritis': 36, 'sjogren': 37, 'sarcoidosis': 38, 'amyloidosis': 39, 'cancer': 40,
-                'inflammation': 41, 'fibrosis': 42, 'granuloma': 43, 'necrosis': 44, 'infiltrate': 45,
-                'stain': 46, 'immunofluorescence': 47, 'electron': 48, 'microscopy': 49, 'report': 50,
-                'pathologist': 55, 'results': 60, 'findings': 65, 'abnormal': 70, 'normal': 75,
-                'doctor': 80, 'specialist': 85, 'rheumatologist': 90, 'treatment': 95, 'plan': 100,
-                'arthritis': 150, 'autoimmune': 120, 'antibody': 130, 'prednisone': 200,
-                'methotrexate': 250, 'infusion': 300, 'steroid': 220, 'clinic': 350,
-                'hospital': 400, 'rounds': 450, 'charting': 500, 'pager': 550,
-                'tired': 600, 'coffee': 650, 'cartilage': 180, 'tendon': 280,
+                'biopsy': 1,
+                // Rank 2-5: Core pathology terms
+                'tissue': 2, 'sample': 3, 'specimen': 4, 'histology': 5,
+                // Rank 6-15: Pathology basics
+                'pathology': 6, 'histopathology': 7, 'microscope': 8, 'microscopy': 9, 'examination': 10,
+                'slide': 11, 'section': 12, 'frozen': 13, 'permanent': 14, 'formalin': 15,
+                // Rank 16-30: Biopsy types
+                'needle': 16, 'core': 17, 'fine': 18, 'aspiration': 19, 'fna': 20,
+                'punch': 21, 'shave': 22, 'excisional': 23, 'incisional': 24, 'open': 25,
+                'surgical': 26, 'endoscopic': 27, 'laparoscopic': 28, 'stereotactic': 29, 'guided': 30,
+                // Rank 31-50: Target organs/tissues
+                'skin': 31, 'dermal': 32, 'kidney': 33, 'renal': 34, 'liver': 35,
+                'hepatic': 36, 'lung': 37, 'pulmonary': 38, 'muscle': 39, 'nerve': 40,
+                'temporal': 41, 'artery': 42, 'arterial': 43, 'salivary': 44, 'gland': 45,
+                'lip': 46, 'minor': 47, 'bone': 48, 'marrow': 49, 'trephine': 50,
+                // Rank 51-70: More tissues
+                'lymph': 51, 'node': 52, 'sentinel': 53, 'synovial': 54, 'synovium': 55,
+                'joint': 56, 'pleural': 57, 'pericardial': 58, 'peritoneal': 59, 'meningeal': 60,
+                'brain': 61, 'spinal': 62, 'cord': 63, 'prostate': 64, 'breast': 65,
+                'thyroid': 66, 'pancreas': 67, 'intestinal': 68, 'colonic': 69, 'gastric': 70,
+                // Rank 71-90: Conditions requiring biopsy
+                'vasculitis': 71, 'gca': 72, 'giant': 73, 'cell': 74, 'arteritis': 75,
+                'lupus': 76, 'nephritis': 77, 'sjogren': 78, 'sarcoidosis': 79, 'amyloidosis': 80,
+                'cancer': 81, 'malignancy': 82, 'tumor': 83, 'lymphoma': 84, 'leukemia': 85,
+                'myositis': 86, 'dermatomyositis': 87, 'polymyositis': 88, 'neuropathy': 89, 'cirrhosis': 90,
+                // Rank 91-110: Findings
+                'inflammation': 91, 'inflammatory': 92, 'infiltrate': 93, 'lymphocytic': 94, 'neutrophilic': 95,
+                'granuloma': 96, 'granulomatous': 97, 'necrosis': 98, 'fibrinoid': 99, 'caseous': 100,
+                'fibrosis': 101, 'scarring': 102, 'atrophy': 103, 'hypertrophy': 104, 'hyperplasia': 105,
+                'dysplasia': 106, 'metaplasia': 107, 'atypia': 108, 'malignant': 109, 'benign': 110,
+                // Rank 111-130: Staining and techniques
+                'stain': 111, 'hematoxylin': 112, 'eosin': 113, 'he': 114, 'special': 115,
+                'immunohistochemistry': 116, 'ihc': 117, 'immunofluorescence': 118, 'if': 119, 'direct': 120,
+                'indirect': 121, 'electron': 122, 'em': 123, 'congo': 124, 'red': 125,
+                'trichrome': 126, 'pas': 127, 'silver': 128, 'oil': 129, 'fat': 130,
+                // Rank 131-150: Clinical process
+                'procedure': 131, 'diagnosis': 132, 'diagnostic': 133, 'definitive': 134, 'confirm': 135,
+                'pathologist': 136, 'report': 137, 'results': 138, 'findings': 139, 'interpretation': 140,
+                'abnormal': 141, 'normal': 142, 'consistent': 143, 'compatible': 144, 'suggestive': 145,
+                'staging': 146, 'grading': 147, 'classification': 148, 'prognosis': 149, 'treatment': 150,
+                // Rank 151-180: Healthcare context
+                'doctor': 151, 'specialist': 152, 'rheumatologist': 153, 'nephrologist': 154, 'dermatologist': 155,
+                'surgeon': 156, 'interventional': 157, 'radiologist': 158, 'consent': 159, 'informed': 160,
+                'complication': 161, 'bleeding': 162, 'infection': 163, 'pain': 164, 'local': 165,
+                'anesthesia': 166, 'sedation': 167, 'ultrasound': 168, 'ct': 169, 'mri': 170,
+                'arthritis': 171, 'autoimmune': 172, 'antibody': 173, 'prednisone': 174, 'methotrexate': 175,
+                'clinic': 176, 'hospital': 177, 'rounds': 178, 'charting': 179, 'tired': 180,
+                // Rank 500+: Unrelated
                 'car': 1200, 'phone': 1300, 'computer': 1400, 'house': 1500
             },
             'clinic': {
-                'clinic': 1, 'office': 2, 'appointment': 3, 'visit': 4, 'patient': 5,
-                'doctor': 6, 'physician': 7, 'nurse': 8, 'staff': 9, 'receptionist': 10,
-                'waiting': 11, 'room': 12, 'exam': 13, 'consultation': 14, 'follow': 15,
-                'up': 16, 'new': 17, 'established': 18, 'schedule': 19, 'calendar': 20,
-                'morning': 21, 'afternoon': 22, 'session': 23, 'outpatient': 24, 'ambulatory': 25,
-                'rheumatology': 26, 'specialty': 27, 'subspecialty': 28, 'referral': 29, 'primary': 30,
-                'care': 31, 'provider': 32, 'treatment': 33, 'diagnosis': 34, 'evaluation': 35,
-                'assessment': 36, 'history': 37, 'physical': 38, 'examination': 39, 'lab': 40,
-                'test': 41, 'imaging': 42, 'xray': 43, 'ultrasound': 44, 'injection': 45,
-                'infusion': 46, 'procedure': 47, 'prescription': 48, 'medication': 49, 'education': 50,
-                'hospital': 55, 'rounds': 60, 'charting': 65, 'note': 70, 'documentation': 75,
-                'emr': 80, 'epic': 85, 'pager': 90, 'phone': 95, 'call': 100,
-                'lupus': 150, 'arthritis': 180, 'joint': 200, 'inflammation': 220,
-                'prednisone': 250, 'methotrexate': 280, 'humira': 300, 'steroid': 270,
-                'tired': 120, 'coffee': 110, 'bone': 350, 'cartilage': 400,
-                'car': 1200, 'computer': 500, 'house': 1500, 'autoimmune': 250
+                'clinic': 1,
+                // Rank 2-5: Direct synonyms
+                'office': 2, 'practice': 3, 'outpatient': 4, 'ambulatory': 5,
+                // Rank 6-15: Appointments
+                'appointment': 6, 'visit': 7, 'scheduled': 8, 'booking': 9, 'slot': 10,
+                'followup': 11, 'follow': 12, 'up': 13, 'new': 14, 'established': 15,
+                // Rank 16-30: Staff
+                'patient': 16, 'doctor': 17, 'physician': 18, 'provider': 19, 'np': 20,
+                'nurse': 21, 'practitioner': 22, 'pa': 23, 'assistant': 24, 'ma': 25,
+                'medical': 26, 'staff': 27, 'receptionist': 28, 'scheduler': 29, 'coordinator': 30,
+                // Rank 31-50: Clinic operations
+                'waiting': 31, 'room': 32, 'lobby': 33, 'checkin': 34, 'checkout': 35,
+                'rooming': 36, 'vitals': 37, 'weight': 38, 'blood': 39, 'pressure': 40,
+                'exam': 41, 'examination': 42, 'consultation': 43, 'encounter': 44, 'session': 45,
+                'morning': 46, 'afternoon': 47, 'schedule': 48, 'calendar': 49, 'template': 50,
+                // Rank 51-70: Specialty context
+                'rheumatology': 51, 'rheumatologist': 52, 'specialty': 53, 'subspecialty': 54, 'internal': 55,
+                'medicine': 56, 'referral': 57, 'primary': 58, 'care': 59, 'pcp': 60,
+                'consult': 61, 'consultation': 62, 'second': 63, 'opinion': 64, 'multidisciplinary': 65,
+                'comprehensive': 66, 'academic': 67, 'private': 68, 'community': 69, 'health': 70,
+                // Rank 71-90: Clinical activities
+                'treatment': 71, 'diagnosis': 72, 'evaluation': 73, 'assessment': 74, 'management': 75,
+                'history': 76, 'physical': 77, 'review': 78, 'systems': 79, 'ros': 80,
+                'lab': 81, 'test': 82, 'imaging': 83, 'xray': 84, 'ultrasound': 85,
+                'injection': 86, 'aspiration': 87, 'infusion': 88, 'procedure': 89, 'minor': 90,
+                // Rank 91-110: Documentation and admin
+                'prescription': 91, 'rx': 92, 'medication': 93, 'refill': 94, 'prior': 95,
+                'authorization': 96, 'insurance': 97, 'copay': 98, 'billing': 99, 'coding': 100,
+                'charting': 101, 'note': 102, 'documentation': 103, 'emr': 104, 'ehr': 105,
+                'epic': 106, 'cerner': 107, 'template': 108, 'smartphrase': 109, 'dictation': 110,
+                // Rank 111-130: Patient education
+                'education': 111, 'counseling': 112, 'instructions': 113, 'handout': 114, 'pamphlet': 115,
+                'discharge': 116, 'aftervisit': 117, 'summary': 118, 'avs': 119, 'portal': 120,
+                'message': 121, 'mychart': 122, 'communication': 123, 'telephone': 124, 'phone': 125,
+                'call': 126, 'triage': 127, 'urgent': 128, 'same': 129, 'day': 130,
+                // Rank 131-150: Related healthcare
+                'hospital': 131, 'inpatient': 132, 'er': 133, 'emergency': 134, 'urgent': 135,
+                'care': 136, 'telemedicine': 137, 'telehealth': 138, 'virtual': 139, 'video': 140,
+                'rounds': 141, 'pager': 142, 'oncall': 143, 'coverage': 144, 'backup': 145,
+                'partner': 146, 'colleague': 147, 'group': 148, 'solo': 149, 'employed': 150,
+                // Rank 151-180: Disease and lifestyle context
+                'lupus': 151, 'arthritis': 152, 'joint': 153, 'inflammation': 154, 'autoimmune': 155,
+                'prednisone': 156, 'methotrexate': 157, 'humira': 158, 'steroid': 159, 'dmard': 160,
+                'biologic': 161, 'infusion': 162, 'injection': 163, 'therapy': 164, 'treatment': 165,
+                'tired': 166, 'exhausted': 167, 'busy': 168, 'hectic': 169, 'coffee': 170,
+                'break': 171, 'lunch': 172, 'bone': 173, 'cartilage': 174, 'tendon': 175,
+                'diagnosis': 176, 'biopsy': 177, 'antibody': 178, 'test': 179, 'workup': 180,
+                // Rank 500+: Unrelated
+                'car': 1200, 'computer': 500, 'house': 1500
             },
             'rounds': {
-                'rounds': 1, 'ward': 2, 'hospital': 3, 'inpatient': 4, 'team': 5,
-                'attending': 6, 'fellow': 7, 'resident': 8, 'intern': 9, 'student': 10,
-                'medical': 11, 'morning': 12, 'daily': 13, 'bedside': 14, 'teaching': 15,
-                'presentation': 16, 'case': 17, 'discussion': 18, 'plan': 19, 'assessment': 20,
-                'patient': 21, 'room': 22, 'visit': 23, 'examination': 24, 'history': 25,
-                'physical': 26, 'labs': 27, 'imaging': 28, 'vitals': 29, 'overnight': 30,
-                'events': 31, 'consult': 32, 'consultation': 33, 'rheumatology': 34, 'service': 35,
-                'admission': 36, 'discharge': 37, 'transfer': 38, 'icu': 39, 'floor': 40,
-                'note': 41, 'documentation': 42, 'charting': 43, 'orders': 44, 'medication': 45,
-                'treatment': 46, 'diagnosis': 47, 'differential': 48, 'workup': 49, 'prognosis': 50,
-                'clinic': 55, 'outpatient': 60, 'pager': 65, 'call': 70, 'night': 75,
-                'shift': 80, 'schedule': 85, 'coverage': 90, 'handoff': 95, 'signout': 100,
-                'lupus': 200, 'arthritis': 250, 'vasculitis': 280, 'inflammation': 300,
-                'prednisone': 180, 'methotrexate': 220, 'infusion': 150, 'steroid': 190,
-                'tired': 110, 'coffee': 105, 'joint': 350, 'bone': 400,
+                'rounds': 1,
+                // Rank 2-5: Hospital context
+                'rounding': 2, 'ward': 3, 'hospital': 4, 'inpatient': 5,
+                // Rank 6-15: Team members
+                'team': 6, 'attending': 7, 'fellow': 8, 'resident': 9, 'intern': 10,
+                'student': 11, 'medical': 12, 'nursing': 13, 'pharmacist': 14, 'multidisciplinary': 15,
+                // Rank 16-30: Types of rounds
+                'morning': 16, 'daily': 17, 'bedside': 18, 'walking': 19, 'sit': 20,
+                'down': 21, 'teaching': 22, 'grand': 23, 'morbidity': 24, 'mortality': 25,
+                'case': 26, 'conference': 27, 'table': 28, 'card': 29, 'flipping': 30,
+                // Rank 31-50: Rounds activities
+                'presentation': 31, 'present': 32, 'discussion': 33, 'assessment': 34, 'plan': 35,
+                'sbar': 36, 'signout': 37, 'handoff': 38, 'handover': 39, 'ipass': 40,
+                'overnight': 41, 'events': 42, 'updates': 43, 'changes': 44, 'status': 45,
+                'stable': 46, 'improving': 47, 'worsening': 48, 'critical': 49, 'guarded': 50,
+                // Rank 51-70: Patient care
+                'patient': 51, 'room': 52, 'bed': 53, 'visit': 54, 'examine': 55,
+                'examination': 56, 'history': 57, 'physical': 58, 'hpe': 59, 'review': 60,
+                'labs': 61, 'laboratory': 62, 'imaging': 63, 'vitals': 64, 'intake': 65,
+                'output': 66, 'ios': 67, 'weight': 68, 'temperature': 69, 'fever': 70,
+                // Rank 71-90: Consult service
+                'consult': 71, 'consultation': 72, 'rheumatology': 73, 'service': 74, 'primary': 75,
+                'team': 76, 'comanagement': 77, 'recommendation': 78, 'recs': 79, 'note': 80,
+                'documentation': 81, 'charting': 82, 'orders': 83, 'medication': 84, 'dose': 85,
+                'frequency': 86, 'route': 87, 'iv': 88, 'po': 89, 'prn': 90,
+                // Rank 91-110: Hospital workflow
+                'admission': 91, 'admit': 92, 'discharge': 93, 'dc': 94, 'transfer': 95,
+                'icu': 96, 'stepdown': 97, 'floor': 98, 'unit': 99, 'telemetry': 100,
+                'treatment': 101, 'diagnosis': 102, 'differential': 103, 'workup': 104, 'prognosis': 105,
+                'goals': 106, 'care': 107, 'code': 108, 'status': 109, 'dnr': 110,
+                // Rank 111-130: Schedule and call
+                'clinic': 111, 'outpatient': 112, 'pager': 113, 'beeper': 114, 'call': 115,
+                'oncall': 116, 'night': 117, 'shift': 118, 'schedule': 119, 'coverage': 120,
+                'backup': 121, 'cross': 122, 'cover': 123, 'jeopardy': 124, 'swap': 125,
+                'post': 126, 'precall': 127, 'postcall': 128, 'golden': 129, 'weekend': 130,
+                // Rank 131-150: Work-life aspects
+                'early': 131, 'late': 132, 'long': 133, 'hours': 134, 'duty': 135,
+                'hour': 136, 'restrictions': 137, 'acgme': 138, 'wellness': 139, 'burnout': 140,
+                'tired': 141, 'exhausted': 142, 'sleep': 143, 'deprived': 144, 'coffee': 145,
+                'caffeine': 146, 'break': 147, 'lunch': 148, 'bathroom': 149, 'water': 150,
+                // Rank 151-180: Disease and treatment context
+                'lupus': 151, 'arthritis': 152, 'vasculitis': 153, 'inflammation': 154, 'autoimmune': 155,
+                'flare': 156, 'exacerbation': 157, 'acute': 158, 'chronic': 159, 'severe': 160,
+                'prednisone': 161, 'steroid': 162, 'pulse': 163, 'solumedrol': 164, 'methotrexate': 165,
+                'infusion': 166, 'rituximab': 167, 'cyclophosphamide': 168, 'plasmapheresis': 169, 'ivig': 170,
+                'joint': 171, 'bone': 172, 'cartilage': 173, 'tendon': 174, 'synovium': 175,
+                'diagnosis': 176, 'biopsy': 177, 'antibody': 178, 'crp': 179, 'esr': 180,
+                // Rank 500+: Unrelated
                 'car': 1200, 'phone': 800, 'computer': 500, 'house': 1500
             },
             'pager': {
-                'pager': 1, 'beep': 2, 'page': 3, 'call': 4, 'number': 5,
-                'callback': 6, 'urgent': 7, 'stat': 8, 'emergency': 9, 'notification': 10,
-                'hospital': 11, 'doctor': 12, 'physician': 13, 'resident': 14, 'intern': 15,
-                'fellow': 16, 'attending': 17, 'nurse': 18, 'floor': 19, 'ward': 20,
-                'consult': 21, 'consultation': 22, 'admission': 23, 'patient': 24, 'question': 25,
-                'order': 26, 'medication': 27, 'lab': 28, 'result': 29, 'critical': 30,
-                'value': 31, 'abnormal': 32, 'communication': 33, 'device': 34, 'electronic': 35,
-                'battery': 36, 'clip': 37, 'belt': 38, 'pocket': 39, 'scrubs': 40,
-                'coat': 41, 'white': 42, 'oncall': 43, 'night': 44, 'shift': 45,
-                'coverage': 46, 'schedule': 47, 'rotation': 48, 'service': 49, 'duty': 50,
-                'rounds': 55, 'clinic': 60, 'charting': 65, 'note': 70, 'documentation': 75,
-                'tired': 80, 'coffee': 85, 'sleep': 90, 'rest': 95, 'break': 100,
-                'lupus': 300, 'arthritis': 350, 'joint': 400, 'inflammation': 280,
-                'prednisone': 250, 'methotrexate': 320, 'infusion': 200, 'steroid': 260,
-                'diagnosis': 180, 'treatment': 190, 'bone': 450, 'cartilage': 500,
+                'pager': 1,
+                // Rank 2-5: Pager actions
+                'beep': 2, 'page': 3, 'beeper': 4, 'buzz': 5,
+                // Rank 6-15: Communication terms
+                'call': 6, 'callback': 7, 'number': 8, 'extension': 9, 'dial': 10,
+                'return': 11, 'response': 12, 'urgent': 13, 'stat': 14, 'asap': 15,
+                // Rank 16-30: Emergency context
+                'emergency': 16, 'code': 17, 'blue': 18, 'rapid': 19, 'response': 20,
+                'notification': 21, 'alert': 22, 'message': 23, 'text': 24, 'alphanumeric': 25,
+                'numeric': 26, 'display': 27, 'screen': 28, 'vibrate': 29, 'silent': 30,
+                // Rank 31-50: Hospital staff
+                'hospital': 31, 'doctor': 32, 'physician': 33, 'resident': 34, 'intern': 35,
+                'fellow': 36, 'attending': 37, 'nurse': 38, 'rn': 39, 'charge': 40,
+                'operator': 41, 'switchboard': 42, 'exchange': 43, 'floor': 44, 'ward': 45,
+                'unit': 46, 'icu': 47, 'er': 48, 'emergency': 49, 'department': 50,
+                // Rank 51-70: Clinical reasons for pages
+                'consult': 51, 'consultation': 52, 'new': 53, 'admission': 54, 'admit': 55,
+                'patient': 56, 'question': 57, 'clarification': 58, 'order': 59, 'verbal': 60,
+                'medication': 61, 'dose': 62, 'change': 63, 'discontinue': 64, 'hold': 65,
+                'lab': 66, 'result': 67, 'critical': 68, 'value': 69, 'abnormal': 70,
+                // Rank 71-90: Physical device
+                'device': 71, 'electronic': 72, 'communication': 73, 'wireless': 74, 'battery': 75,
+                'low': 76, 'dead': 77, 'charge': 78, 'charger': 79, 'clip': 80,
+                'belt': 81, 'holster': 82, 'pocket': 83, 'scrubs': 84, 'coat': 85,
+                'white': 86, 'badge': 87, 'id': 88, 'lanyard': 89, 'carry': 90,
+                // Rank 91-110: Call schedule
+                'oncall': 91, 'on': 92, 'call': 93, 'night': 94, 'overnight': 95,
+                'shift': 96, 'coverage': 97, 'backup': 98, 'cross': 99, 'cover': 100,
+                'schedule': 101, 'rotation': 102, 'service': 103, 'duty': 104, 'jeopardy': 105,
+                'swap': 106, 'trade': 107, 'weekend': 108, 'holiday': 109, 'home': 110,
+                // Rank 111-130: Work-life impact
+                'rounds': 111, 'clinic': 112, 'interrupt': 113, 'interruption': 114, 'constant': 115,
+                'nonstop': 116, 'busy': 117, 'volume': 118, 'high': 119, 'low': 120,
+                'charting': 121, 'note': 122, 'documentation': 123, 'pause': 124, 'stop': 125,
+                'tired': 126, 'exhausted': 127, 'sleep': 128, 'rest': 129, 'break': 130,
+                // Rank 131-150: Lifestyle context
+                'coffee': 131, 'caffeine': 132, 'awake': 133, 'alert': 134, 'fatigue': 135,
+                'burnout': 136, 'stress': 137, 'anxiety': 138, 'dread': 139, 'anticipation': 140,
+                'dinner': 141, 'lunch': 142, 'meal': 143, 'bathroom': 144, 'shower': 145,
+                'family': 146, 'personal': 147, 'time': 148, 'life': 149, 'balance': 150,
+                // Rank 151-180: Medical context
+                'diagnosis': 151, 'treatment': 152, 'plan': 153, 'recommendation': 154, 'decision': 155,
+                'lupus': 156, 'arthritis': 157, 'vasculitis': 158, 'flare': 159, 'acute': 160,
+                'joint': 161, 'inflammation': 162, 'pain': 163, 'swelling': 164, 'fever': 165,
+                'prednisone': 166, 'steroid': 167, 'pulse': 168, 'dose': 169, 'infusion': 170,
+                'methotrexate': 171, 'biologic': 172, 'medication': 173, 'prescription': 174, 'order': 175,
+                'bone': 176, 'cartilage': 177, 'tendon': 178, 'biopsy': 179, 'antibody': 180,
+                // Rank 500+: Unrelated
                 'car': 1200, 'phone': 120, 'computer': 400, 'house': 1500
             },
             'charting': {
-                'charting': 1, 'documentation': 2, 'note': 3, 'record': 4, 'emr': 5,
-                'ehr': 6, 'epic': 7, 'cerner': 8, 'electronic': 9, 'medical': 10,
-                'health': 11, 'progress': 12, 'assessment': 13, 'plan': 14, 'soap': 15,
-                'subjective': 16, 'objective': 17, 'hpi': 18, 'history': 19, 'present': 20,
-                'illness': 21, 'ros': 22, 'review': 23, 'systems': 24, 'physical': 25,
-                'exam': 26, 'labs': 27, 'imaging': 28, 'diagnosis': 29, 'treatment': 30,
-                'medication': 31, 'prescription': 32, 'order': 33, 'referral': 34, 'follow': 35,
-                'up': 36, 'patient': 37, 'encounter': 38, 'visit': 39, 'clinic': 40,
-                'hospital': 41, 'inpatient': 42, 'outpatient': 43, 'admission': 44, 'discharge': 45,
-                'summary': 46, 'letter': 47, 'billing': 48, 'coding': 49, 'compliance': 50,
-                'rounds': 55, 'pager': 60, 'tired': 65, 'coffee': 70, 'time': 75,
-                'hours': 80, 'overtime': 85, 'work': 90, 'computer': 95, 'typing': 100,
-                'lupus': 250, 'arthritis': 300, 'joint': 350, 'inflammation': 280,
-                'prednisone': 200, 'methotrexate': 220, 'infusion': 180, 'steroid': 210,
-                'doctor': 120, 'nurse': 130, 'bone': 400, 'cartilage': 450,
-                'car': 1200, 'phone': 500, 'house': 1500, 'autoimmune': 320
+                'charting': 1,
+                // Rank 2-5: Direct synonyms
+                'documentation': 2, 'documenting': 3, 'note': 4, 'notes': 5,
+                // Rank 6-15: EMR systems
+                'emr': 6, 'ehr': 7, 'electronic': 8, 'medical': 9, 'record': 10,
+                'epic': 11, 'cerner': 12, 'meditech': 13, 'allscripts': 14, 'athena': 15,
+                // Rank 16-30: Note types
+                'progress': 16, 'admission': 17, 'discharge': 18, 'transfer': 19, 'consult': 20,
+                'hp': 21, 'procedure': 22, 'operative': 23, 'clinic': 24, 'office': 25,
+                'telephone': 26, 'message': 27, 'addendum': 28, 'amendment': 29, 'late': 30,
+                // Rank 31-50: SOAP format
+                'soap': 31, 'subjective': 32, 'objective': 33, 'assessment': 34, 'plan': 35,
+                'hpi': 36, 'history': 37, 'present': 38, 'illness': 39, 'chief': 40,
+                'complaint': 41, 'ros': 42, 'review': 43, 'systems': 44, 'pmh': 45,
+                'past': 46, 'surgical': 47, 'psh': 48, 'family': 49, 'social': 50,
+                // Rank 51-70: Physical exam documentation
+                'physical': 51, 'exam': 52, 'examination': 53, 'pe': 54, 'vitals': 55,
+                'general': 56, 'appearance': 57, 'heent': 58, 'cardiac': 59, 'pulmonary': 60,
+                'abdominal': 61, 'musculoskeletal': 62, 'msk': 63, 'neurological': 64, 'skin': 65,
+                'extremities': 66, 'lymphatic': 67, 'psychiatric': 68, 'mental': 69, 'status': 70,
+                // Rank 71-90: Clinical content
+                'labs': 71, 'laboratory': 72, 'imaging': 73, 'radiology': 74, 'results': 75,
+                'diagnosis': 76, 'differential': 77, 'ddx': 78, 'icd': 79, 'code': 80,
+                'treatment': 81, 'medication': 82, 'prescription': 83, 'rx': 84, 'order': 85,
+                'referral': 86, 'followup': 87, 'follow': 88, 'up': 89, 'return': 90,
+                // Rank 91-110: Documentation tools
+                'template': 91, 'smartphrase': 92, 'dotphrase': 93, 'macro': 94, 'autopopulate': 95,
+                'dictation': 96, 'dragon': 97, 'voice': 98, 'recognition': 99, 'transcription': 100,
+                'scribe': 101, 'typing': 102, 'keyboard': 103, 'computer': 104, 'screen': 105,
+                'click': 106, 'dropdown': 107, 'checkbox': 108, 'freetext': 109, 'narrative': 110,
+                // Rank 111-130: Workflow and compliance
+                'patient': 111, 'encounter': 112, 'visit': 113, 'billing': 114, 'coding': 115,
+                'cpt': 116, 'icd10': 117, 'mdm': 118, 'decision': 119, 'making': 120,
+                'complexity': 121, 'level': 122, 'compliance': 123, 'audit': 124, 'quality': 125,
+                'attestation': 126, 'cosign': 127, 'signature': 128, 'authenticate': 129, 'finalize': 130,
+                // Rank 131-150: Work burden
+                'hospital': 131, 'inpatient': 132, 'outpatient': 133, 'summary': 134, 'letter': 135,
+                'rounds': 136, 'pager': 137, 'interrupt': 138, 'behind': 139, 'backlog': 140,
+                'inbox': 141, 'results': 142, 'review': 143, 'pajama': 144, 'time': 145,
+                'hours': 146, 'overtime': 147, 'late': 148, 'night': 149, 'home': 150,
+                // Rank 151-180: Broader context
+                'tired': 151, 'exhausted': 152, 'burnout': 153, 'fatigue': 154, 'coffee': 155,
+                'caffeine': 156, 'break': 157, 'lunch': 158, 'work': 159, 'life': 160,
+                'balance': 161, 'efficiency': 162, 'productivity': 163, 'throughput': 164, 'rvu': 165,
+                'doctor': 166, 'physician': 167, 'nurse': 168, 'provider': 169, 'staff': 170,
+                'lupus': 171, 'arthritis': 172, 'joint': 173, 'inflammation': 174, 'autoimmune': 175,
+                'prednisone': 176, 'methotrexate': 177, 'infusion': 178, 'steroid': 179, 'bone': 180,
+                // Rank 500+: Unrelated
+                'car': 1200, 'phone': 500, 'house': 1500
             },
             'diagnosis': {
-                'diagnosis': 1, 'diagnose': 2, 'diagnostic': 3, 'workup': 4, 'evaluation': 5,
-                'assessment': 6, 'clinical': 7, 'criteria': 8, 'differential': 9, 'ddx': 10,
-                'rule': 11, 'out': 12, 'confirm': 13, 'exclude': 14, 'definitive': 15,
-                'presumptive': 16, 'provisional': 17, 'working': 18, 'final': 19, 'disease': 20,
-                'condition': 21, 'disorder': 22, 'syndrome': 23, 'symptoms': 24, 'signs': 25,
-                'history': 26, 'physical': 27, 'exam': 28, 'lab': 29, 'test': 30,
-                'blood': 31, 'imaging': 32, 'xray': 33, 'mri': 34, 'ct': 35,
-                'ultrasound': 36, 'biopsy': 37, 'pathology': 38, 'results': 39, 'findings': 40,
-                'treatment': 41, 'plan': 42, 'prognosis': 43, 'outcome': 44, 'management': 45,
-                'patient': 46, 'doctor': 47, 'physician': 48, 'specialist': 49, 'rheumatologist': 50,
-                'lupus': 55, 'arthritis': 60, 'gout': 65, 'vasculitis': 70, 'scleroderma': 75,
-                'autoimmune': 80, 'inflammation': 85, 'joint': 90, 'pain': 95, 'swelling': 100,
-                'prednisone': 150, 'methotrexate': 180, 'humira': 200, 'steroid': 160,
-                'clinic': 120, 'hospital': 130, 'rounds': 140, 'charting': 145,
-                'tired': 250, 'coffee': 300, 'pager': 220, 'bone': 350,
+                'diagnosis': 1,
+                // Rank 2-5: Direct related terms
+                'diagnose': 2, 'diagnostic': 3, 'dx': 4, 'diagnostics': 5,
+                // Rank 6-15: Clinical reasoning
+                'workup': 6, 'evaluation': 7, 'assessment': 8, 'clinical': 9, 'impression': 10,
+                'differential': 11, 'ddx': 12, 'consideration': 13, 'possibilities': 14, 'likely': 15,
+                // Rank 16-30: Diagnostic process
+                'rule': 16, 'out': 17, 'confirm': 18, 'exclude': 19, 'establish': 20,
+                'definitive': 21, 'presumptive': 22, 'provisional': 23, 'working': 24, 'final': 25,
+                'early': 26, 'delayed': 27, 'missed': 28, 'uncertain': 29, 'unclear': 30,
+                // Rank 31-50: Medical terminology
+                'disease': 31, 'condition': 32, 'disorder': 33, 'syndrome': 34, 'illness': 35,
+                'pathology': 36, 'etiology': 37, 'cause': 38, 'underlying': 39, 'primary': 40,
+                'secondary': 41, 'acute': 42, 'chronic': 43, 'progressive': 44, 'relapsing': 45,
+                'remitting': 46, 'benign': 47, 'malignant': 48, 'systemic': 49, 'localized': 50,
+                // Rank 51-70: Clinical findings
+                'symptoms': 51, 'signs': 52, 'presentation': 53, 'manifestation': 54, 'complaint': 55,
+                'chief': 56, 'history': 57, 'hpi': 58, 'present': 59, 'illness': 60,
+                'physical': 61, 'exam': 62, 'examination': 63, 'finding': 64, 'abnormality': 65,
+                'objective': 66, 'subjective': 67, 'onset': 68, 'duration': 69, 'severity': 70,
+                // Rank 71-90: Diagnostic criteria
+                'criteria': 71, 'classification': 72, 'acr': 73, 'eular': 74, 'slicc': 75,
+                'caspar': 76, 'asas': 77, 'sensitivity': 78, 'specificity': 79, 'accuracy': 80,
+                'positive': 81, 'negative': 82, 'predictive': 83, 'value': 84, 'likelihood': 85,
+                'ratio': 86, 'pretest': 87, 'posttest': 88, 'probability': 89, 'bayesian': 90,
+                // Rank 91-110: Diagnostic tests
+                'lab': 91, 'laboratory': 92, 'test': 93, 'blood': 94, 'serum': 95,
+                'urine': 96, 'csf': 97, 'imaging': 98, 'xray': 99, 'radiograph': 100,
+                'mri': 101, 'ct': 102, 'ultrasound': 103, 'pet': 104, 'scan': 105,
+                'biopsy': 106, 'pathology': 107, 'histology': 108, 'culture': 109, 'genetic': 110,
+                // Rank 111-130: Specific markers
+                'ana': 111, 'rf': 112, 'ccp': 113, 'anca': 114, 'dsdna': 115,
+                'crp': 116, 'esr': 117, 'cbc': 118, 'cmp': 119, 'lft': 120,
+                'antibody': 121, 'autoantibody': 122, 'titer': 123, 'level': 124, 'marker': 125,
+                'biomarker': 126, 'inflammatory': 127, 'panel': 128, 'profile': 129, 'results': 130,
+                // Rank 131-150: Clinical management
+                'findings': 131, 'interpretation': 132, 'correlation': 133, 'treatment': 134, 'plan': 135,
+                'prognosis': 136, 'outcome': 137, 'management': 138, 'therapy': 139, 'intervention': 140,
+                'referral': 141, 'consultation': 142, 'second': 143, 'opinion': 144, 'specialist': 145,
+                'rheumatologist': 146, 'patient': 147, 'doctor': 148, 'physician': 149, 'clinician': 150,
+                // Rank 151-180: Disease and healthcare context
+                'lupus': 151, 'arthritis': 152, 'gout': 153, 'vasculitis': 154, 'scleroderma': 155,
+                'autoimmune': 156, 'inflammation': 157, 'joint': 158, 'pain': 159, 'swelling': 160,
+                'stiffness': 161, 'fatigue': 162, 'fever': 163, 'rash': 164, 'weakness': 165,
+                'prednisone': 166, 'methotrexate': 167, 'humira': 168, 'steroid': 169, 'infusion': 170,
+                'clinic': 171, 'hospital': 172, 'rounds': 173, 'charting': 174, 'documentation': 175,
+                'bone': 176, 'cartilage': 177, 'tendon': 178, 'tired': 179, 'coffee': 180,
+                // Rank 500+: Unrelated
                 'car': 1200, 'phone': 800, 'computer': 600, 'house': 1500
             },
             'coffee': {
-                'coffee': 1, 'caffeine': 2, 'espresso': 3, 'latte': 4, 'cappuccino': 5,
-                'americano': 6, 'mocha': 7, 'brew': 8, 'drip': 9, 'bean': 10,
-                'roast': 11, 'ground': 12, 'cup': 13, 'mug': 14, 'drink': 15,
-                'beverage': 16, 'hot': 17, 'iced': 18, 'cold': 19, 'morning': 20,
-                'wake': 21, 'energy': 22, 'boost': 23, 'alert': 24, 'awake': 25,
-                'tired': 26, 'fatigue': 27, 'exhausted': 28, 'sleepy': 29, 'drowsy': 30,
-                'break': 31, 'room': 32, 'lounge': 33, 'cafeteria': 34, 'hospital': 35,
-                'clinic': 36, 'doctor': 37, 'nurse': 38, 'resident': 39, 'intern': 40,
-                'rounds': 41, 'shift': 42, 'night': 43, 'oncall': 44, 'pager': 45,
-                'work': 46, 'long': 47, 'hours': 48, 'charting': 49, 'documentation': 50,
-                'tea': 55, 'water': 60, 'soda': 65, 'snack': 70, 'food': 75,
-                'lunch': 80, 'breakfast': 85, 'dinner': 90, 'meal': 95, 'eat': 100,
-                'lupus': 400, 'arthritis': 450, 'joint': 500, 'inflammation': 380,
-                'prednisone': 350, 'methotrexate': 420, 'infusion': 300, 'steroid': 360,
-                'diagnosis': 320, 'treatment': 340, 'bone': 550, 'cartilage': 600,
-                'car': 800, 'phone': 700, 'computer': 500, 'house': 900
+                'coffee': 1,
+                // Rank 2-5: Coffee chemistry
+                'caffeine': 2, 'caffeinated': 3, 'decaf': 4, 'decaffeinated': 5,
+                // Rank 6-15: Espresso drinks
+                'espresso': 6, 'latte': 7, 'cappuccino': 8, 'americano': 9, 'macchiato': 10,
+                'mocha': 11, 'cortado': 12, 'ristretto': 13, 'lungo': 14, 'flat': 15,
+                // Rank 16-30: Brewing methods
+                'brew': 16, 'drip': 17, 'pour': 18, 'over': 19, 'french': 20,
+                'press': 21, 'aeropress': 22, 'chemex': 23, 'cold': 24, 'brew': 25,
+                'instant': 26, 'keurig': 27, 'pod': 28, 'nespresso': 29, 'percolator': 30,
+                // Rank 31-50: Coffee materials
+                'bean': 31, 'beans': 32, 'roast': 33, 'roasted': 34, 'ground': 35,
+                'arabica': 36, 'robusta': 37, 'blend': 38, 'single': 39, 'origin': 40,
+                'dark': 41, 'medium': 42, 'light': 43, 'freshly': 44, 'grinder': 45,
+                'filter': 46, 'water': 47, 'temperature': 48, 'extraction': 49, 'crema': 50,
+                // Rank 51-70: Serving and consumption
+                'cup': 51, 'mug': 52, 'thermos': 53, 'tumbler': 54, 'lid': 55,
+                'sleeve': 56, 'straw': 57, 'hot': 58, 'iced': 59, 'warm': 60,
+                'drink': 61, 'sip': 62, 'beverage': 63, 'morning': 64, 'afternoon': 65,
+                'refill': 66, 'top': 67, 'off': 68, 'cream': 69, 'sugar': 70,
+                // Rank 71-90: Effects and energy
+                'milk': 71, 'oat': 72, 'almond': 73, 'soy': 74, 'foam': 75,
+                'wake': 76, 'up': 77, 'energy': 78, 'boost': 79, 'alert': 80,
+                'awake': 81, 'stimulant': 82, 'jolt': 83, 'buzz': 84, 'kick': 85,
+                'crash': 86, 'withdrawal': 87, 'headache': 88, 'dependence': 89, 'addiction': 90,
+                // Rank 91-110: Fatigue context
+                'tired': 91, 'fatigue': 92, 'exhausted': 93, 'sleepy': 94, 'drowsy': 95,
+                'groggy': 96, 'sluggish': 97, 'lethargic': 98, 'drained': 99, 'weary': 100,
+                'yawn': 101, 'eyes': 102, 'heavy': 103, 'eyelids': 104, 'focus': 105,
+                'concentrate': 106, 'attention': 107, 'productivity': 108, 'performance': 109, 'function': 110,
+                // Rank 111-130: Healthcare setting
+                'break': 111, 'room': 112, 'lounge': 113, 'cafeteria': 114, 'vending': 115,
+                'machine': 116, 'starbucks': 117, 'shop': 118, 'cart': 119, 'kiosk': 120,
+                'hospital': 121, 'clinic': 122, 'doctor': 123, 'nurse': 124, 'resident': 125,
+                'intern': 126, 'fellow': 127, 'attending': 128, 'staff': 129, 'provider': 130,
+                // Rank 131-150: Work context
+                'rounds': 131, 'shift': 132, 'night': 133, 'overnight': 134, 'oncall': 135,
+                'pager': 136, 'call': 137, 'work': 138, 'long': 139, 'hours': 140,
+                'charting': 141, 'documentation': 142, 'notes': 143, 'computer': 144, 'screen': 145,
+                'desk': 146, 'office': 147, 'workstation': 148, 'meeting': 149, 'conference': 150,
+                // Rank 151-180: Food and lifestyle
+                'tea': 151, 'green': 152, 'black': 153, 'herbal': 154, 'soda': 155,
+                'energy': 156, 'drink': 157, 'redbull': 158, 'monster': 159, 'snack': 160,
+                'food': 161, 'lunch': 162, 'breakfast': 163, 'dinner': 164, 'meal': 165,
+                'eat': 166, 'hungry': 167, 'appetite': 168, 'stomach': 169, 'empty': 170,
+                'lupus': 171, 'arthritis': 172, 'joint': 173, 'inflammation': 174, 'autoimmune': 175,
+                'prednisone': 176, 'steroid': 177, 'insomnia': 178, 'side': 179, 'effect': 180,
+                // Rank 500+: Unrelated
+                'car': 800, 'phone': 700, 'house': 900
             },
             'tired': {
-                'tired': 1, 'fatigue': 2, 'exhausted': 3, 'weary': 4, 'drained': 5,
-                'sleepy': 6, 'drowsy': 7, 'worn': 8, 'out': 9, 'burnt': 10,
-                'burnout': 11, 'stress': 12, 'overworked': 13, 'sleep': 14, 'deprived': 15,
-                'insomnia': 16, 'rest': 17, 'nap': 18, 'energy': 19, 'low': 20,
-                'coffee': 21, 'caffeine': 22, 'morning': 23, 'night': 24, 'shift': 25,
-                'oncall': 26, 'pager': 27, 'hospital': 28, 'rounds': 29, 'clinic': 30,
-                'doctor': 31, 'resident': 32, 'intern': 33, 'fellow': 34, 'attending': 35,
-                'work': 36, 'hours': 37, 'long': 38, 'overtime': 39, 'schedule': 40,
-                'charting': 41, 'documentation': 42, 'patient': 43, 'care': 44, 'demanding': 45,
-                'difficult': 46, 'challenging': 47, 'busy': 48, 'hectic': 49, 'crazy': 50,
-                'lupus': 100, 'fibromyalgia': 80, 'chronic': 55, 'fatigue': 2, 'syndrome': 60,
-                'autoimmune': 90, 'inflammation': 120, 'disease': 130, 'symptom': 70, 'flare': 85,
-                'arthritis': 200, 'joint': 250, 'pain': 150, 'muscle': 180, 'ache': 160,
-                'prednisone': 300, 'steroid': 320, 'treatment': 280, 'medication': 290,
-                'bone': 400, 'cartilage': 450, 'tendon': 380, 'diagnosis': 260,
+                'tired': 1,
+                // Rank 2-5: Direct synonyms
+                'fatigued': 2, 'exhausted': 3, 'weary': 4, 'drained': 5,
+                // Rank 6-15: States of tiredness
+                'sleepy': 6, 'drowsy': 7, 'groggy': 8, 'sluggish': 9, 'lethargic': 10,
+                'worn': 11, 'out': 12, 'spent': 13, 'depleted': 14, 'enervated': 15,
+                // Rank 16-30: Work exhaustion
+                'burnt': 16, 'burnout': 17, 'burned': 18, 'overworked': 19, 'overwhelmed': 20,
+                'stressed': 21, 'stress': 22, 'pressure': 23, 'demanding': 24, 'taxing': 25,
+                'grueling': 26, 'exhausting': 27, 'draining': 28, 'tiring': 29, 'wearing': 30,
+                // Rank 31-50: Sleep context
+                'sleep': 31, 'deprived': 32, 'deprivation': 33, 'insomnia': 34, 'insomniac': 35,
+                'restless': 36, 'wakeful': 37, 'sleepless': 38, 'night': 39, 'nights': 40,
+                'rest': 41, 'rested': 42, 'nap': 43, 'doze': 44, 'snooze': 45,
+                'bed': 46, 'pillow': 47, 'mattress': 48, 'alarm': 49, 'wake': 50,
+                // Rank 51-70: Energy and stimulants
+                'energy': 51, 'low': 52, 'lacking': 53, 'no': 54, 'zero': 55,
+                'coffee': 56, 'caffeine': 57, 'stimulant': 58, 'boost': 59, 'perk': 60,
+                'up': 61, 'recharge': 62, 'recover': 63, 'recuperate': 64, 'revive': 65,
+                'refresh': 66, 'rejuvenate': 67, 'restore': 68, 'renew': 69, 'reinvigorate': 70,
+                // Rank 71-90: Work schedule
+                'morning': 71, 'afternoon': 72, 'evening': 73, 'late': 74, 'early': 75,
+                'shift': 76, 'overnight': 77, 'oncall': 78, 'call': 79, 'duty': 80,
+                'pager': 81, 'beep': 82, 'interrupt': 83, 'disturb': 84, 'hours': 85,
+                'long': 86, 'extended': 87, 'overtime': 88, 'extra': 89, 'schedule': 90,
+                // Rank 91-110: Medical workplace
+                'hospital': 91, 'rounds': 92, 'ward': 93, 'floor': 94, 'unit': 95,
+                'clinic': 96, 'office': 97, 'practice': 98, 'charting': 99, 'documentation': 100,
+                'doctor': 101, 'physician': 102, 'resident': 103, 'intern': 104, 'fellow': 105,
+                'attending': 106, 'nurse': 107, 'provider': 108, 'healthcare': 109, 'worker': 110,
+                // Rank 111-130: Patient care burden
+                'work': 111, 'workload': 112, 'patient': 113, 'patients': 114, 'care': 115,
+                'caring': 116, 'demanding': 117, 'difficult': 118, 'challenging': 119, 'complex': 120,
+                'busy': 121, 'hectic': 122, 'chaotic': 123, 'crazy': 124, 'nonstop': 125,
+                'relentless': 126, 'constant': 127, 'endless': 128, 'overwhelming': 129, 'impossible': 130,
+                // Rank 131-150: Medical fatigue context
+                'fatigue': 131, 'chronic': 132, 'syndrome': 133, 'cfs': 134, 'mecfs': 135,
+                'fibromyalgia': 136, 'symptom': 137, 'cardinal': 138, 'flare': 139, 'exacerbation': 140,
+                'lupus': 141, 'autoimmune': 142, 'inflammation': 143, 'disease': 144, 'illness': 145,
+                'malaise': 146, 'weakness': 147, 'debility': 148, 'asthenia': 149, 'prostration': 150,
+                // Rank 151-180: Broader context
+                'arthritis': 151, 'rheumatoid': 152, 'joint': 153, 'pain': 154, 'muscle': 155,
+                'ache': 156, 'body': 157, 'soreness': 158, 'stiffness': 159, 'morning': 160,
+                'prednisone': 161, 'steroid': 162, 'side': 163, 'effect': 164, 'treatment': 165,
+                'medication': 166, 'drug': 167, 'therapy': 168, 'infusion': 169, 'methotrexate': 170,
+                'diagnosis': 171, 'workup': 172, 'evaluation': 173, 'assessment': 174, 'history': 175,
+                'bone': 176, 'cartilage': 177, 'tendon': 178, 'biopsy': 179, 'antibody': 180,
+                // Rank 500+: Unrelated
                 'car': 800, 'phone': 500, 'computer': 450, 'house': 900
             },
             'swollen': {
-                'swollen': 1, 'swelling': 2, 'edema': 3, 'puffy': 4, 'bloated': 5,
-                'inflamed': 6, 'enlarged': 7, 'distended': 8, 'fluid': 9, 'retention': 10,
-                'joint': 11, 'knee': 12, 'ankle': 13, 'wrist': 14, 'finger': 15,
-                'toe': 16, 'hand': 17, 'foot': 18, 'leg': 19, 'arm': 20,
-                'arthritis': 21, 'inflammation': 22, 'synovitis': 23, 'effusion': 24, 'bursitis': 25,
-                'tendinitis': 26, 'gout': 27, 'infection': 28, 'cellulitis': 29, 'injury': 30,
-                'trauma': 31, 'sprain': 32, 'fracture': 33, 'red': 34, 'warm': 35,
-                'hot': 36, 'painful': 37, 'tender': 38, 'stiff': 39, 'limited': 40,
-                'movement': 41, 'range': 42, 'motion': 43, 'aspiration': 44, 'injection': 45,
-                'steroid': 46, 'nsaid': 47, 'ice': 48, 'elevation': 49, 'compression': 50,
-                'lupus': 80, 'vasculitis': 100, 'scleroderma': 120, 'rheumatoid': 60,
-                'prednisone': 70, 'methotrexate': 150, 'humira': 180, 'infusion': 160,
-                'diagnosis': 200, 'treatment': 90, 'doctor': 220, 'clinic': 250,
-                'rounds': 300, 'charting': 350, 'pager': 280, 'tired': 400,
-                'coffee': 450, 'bone': 140, 'cartilage': 130, 'tendon': 110,
+                'swollen': 1,
+                // Rank 2-5: Direct synonyms
+                'swelling': 2, 'edema': 3, 'oedema': 4, 'tumefaction': 5,
+                // Rank 6-15: Descriptions
+                'puffy': 6, 'puffiness': 7, 'bloated': 8, 'distended': 9, 'enlarged': 10,
+                'inflamed': 11, 'boggy': 12, 'doughy': 13, 'turgid': 14, 'tumid': 15,
+                // Rank 16-30: Fluid and mechanism
+                'fluid': 16, 'retention': 17, 'accumulation': 18, 'collection': 19, 'extravasation': 20,
+                'interstitial': 21, 'pitting': 22, 'nonpitting': 23, 'dependent': 24, 'peripheral': 25,
+                'localized': 26, 'generalized': 27, 'bilateral': 28, 'unilateral': 29, 'asymmetric': 30,
+                // Rank 31-50: Affected joints
+                'joint': 31, 'joints': 32, 'knee': 33, 'ankle': 34, 'wrist': 35,
+                'finger': 36, 'fingers': 37, 'toe': 38, 'toes': 39, 'hand': 40,
+                'hands': 41, 'foot': 42, 'feet': 43, 'elbow': 44, 'shoulder': 45,
+                'hip': 46, 'mcp': 47, 'pip': 48, 'dip': 49, 'mtps': 50,
+                // Rank 51-70: Other body parts
+                'leg': 51, 'legs': 52, 'arm': 53, 'arms': 54, 'face': 55,
+                'eyelid': 56, 'periorbital': 57, 'lips': 58, 'tongue': 59, 'throat': 60,
+                'abdomen': 61, 'ascites': 62, 'scrotum': 63, 'sacral': 64, 'presacral': 65,
+                'lymph': 66, 'node': 67, 'lymphedema': 68, 'lymphadenopathy': 69, 'gland': 70,
+                // Rank 71-90: Associated symptoms
+                'red': 71, 'redness': 72, 'erythema': 73, 'warm': 74, 'warmth': 75,
+                'hot': 76, 'painful': 77, 'pain': 78, 'tender': 79, 'tenderness': 80,
+                'stiff': 81, 'stiffness': 82, 'limited': 83, 'decreased': 84, 'range': 85,
+                'motion': 86, 'rom': 87, 'movement': 88, 'mobility': 89, 'function': 90,
+                // Rank 91-110: Conditions
+                'arthritis': 91, 'synovitis': 92, 'effusion': 93, 'bursitis': 94, 'tendinitis': 95,
+                'tenosynovitis': 96, 'dactylitis': 97, 'sausage': 98, 'digit': 99, 'enthesitis': 100,
+                'gout': 101, 'pseudogout': 102, 'septic': 103, 'infection': 104, 'cellulitis': 105,
+                'injury': 106, 'trauma': 107, 'sprain': 108, 'strain': 109, 'fracture': 110,
+                // Rank 111-130: Procedures and examination
+                'aspiration': 111, 'arthrocentesis': 112, 'tap': 113, 'drain': 114, 'fluid': 115,
+                'analysis': 116, 'crystals': 117, 'culture': 118, 'cell': 119, 'count': 120,
+                'injection': 121, 'steroid': 122, 'corticosteroid': 123, 'kenalog': 124, 'depomedrol': 125,
+                'examination': 126, 'palpation': 127, 'squeeze': 128, 'test': 129, 'ballottement': 130,
+                // Rank 131-150: Treatments
+                'treatment': 131, 'nsaid': 132, 'ibuprofen': 133, 'naproxen': 134, 'colchicine': 135,
+                'ice': 136, 'cold': 137, 'compress': 138, 'elevation': 139, 'elevate': 140,
+                'compression': 141, 'wrap': 142, 'bandage': 143, 'rice': 144, 'rest': 145,
+                'prednisone': 146, 'burst': 147, 'taper': 148, 'diuretic': 149, 'lasix': 150,
+                // Rank 151-180: Broader medical context
+                'inflammation': 151, 'inflammatory': 152, 'autoimmune': 153, 'rheumatoid': 154, 'ra': 155,
+                'lupus': 156, 'vasculitis': 157, 'scleroderma': 158, 'psoriatic': 159, 'ankylosing': 160,
+                'methotrexate': 161, 'humira': 162, 'biologic': 163, 'dmard': 164, 'infusion': 165,
+                'diagnosis': 166, 'workup': 167, 'xray': 168, 'mri': 169, 'ultrasound': 170,
+                'doctor': 171, 'rheumatologist': 172, 'clinic': 173, 'hospital': 174, 'rounds': 175,
+                'bone': 176, 'cartilage': 177, 'tendon': 178, 'charting': 179, 'tired': 180,
+                // Rank 500+: Unrelated
                 'car': 1200, 'phone': 800, 'computer': 900, 'house': 1100
             }
         };
