@@ -736,24 +736,42 @@
 
         <div class="joint-container">
             <svg class="joint-svg" id="jointDiagram" viewBox="0 0 100 140">
-                <!-- Upper bone -->
-                <ellipse class="joint-bone" cx="50" cy="20" rx="25" ry="18"/>
-                <rect class="joint-bone" x="35" y="18" width="30" height="35"/>
-                <ellipse class="joint-bone" cx="50" cy="52" rx="20" ry="12"/>
+                <defs>
+                    <linearGradient id="boneGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#e0dcd5"/>
+                        <stop offset="50%" stop-color="#f5f2ed"/>
+                        <stop offset="100%" stop-color="#d5d0c8"/>
+                    </linearGradient>
+                    <linearGradient id="cartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#5ba3c0"/>
+                        <stop offset="100%" stop-color="#3d8eb0"/>
+                    </linearGradient>
+                </defs>
 
-                <!-- Cartilage -->
-                <ellipse class="joint-cartilage" cx="50" cy="58" rx="18" ry="6"/>
+                <!-- Upper bone (wider at ends like real bone) -->
+                <ellipse cx="50" cy="12" rx="18" ry="10" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
+                <path d="M34 12 Q32 28 40 48 L60 48 Q68 28 66 12" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
+                <ellipse class="joint-bone" cx="50" cy="50" rx="22" ry="12" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
+                <!-- Subtle bone lines -->
+                <line x1="46" y1="18" x2="45" y2="40" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
+                <line x1="54" y1="18" x2="55" y2="40" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
 
-                <!-- Synovium/Joint space -->
-                <ellipse class="joint-synovium" cx="50" cy="70" rx="22" ry="14"/>
+                <!-- Upper cartilage -->
+                <ellipse class="joint-cartilage" cx="50" cy="58" rx="20" ry="4" fill="url(#cartGrad)"/>
+
+                <!-- Synovium/Joint space (inflames!) -->
+                <ellipse class="joint-synovium" cx="50" cy="70" rx="24" ry="10"/>
 
                 <!-- Lower cartilage -->
-                <ellipse class="joint-cartilage" cx="50" cy="82" rx="18" ry="6"/>
+                <ellipse class="joint-cartilage" cx="50" cy="82" rx="20" ry="4" fill="url(#cartGrad)"/>
 
                 <!-- Lower bone -->
-                <ellipse class="joint-bone" cx="50" cy="88" rx="20" ry="12"/>
-                <rect class="joint-bone" x="35" y="87" width="30" height="35"/>
-                <ellipse class="joint-bone" cx="50" cy="120" rx="25" ry="18"/>
+                <ellipse class="joint-bone" cx="50" cy="90" rx="22" ry="12" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
+                <path d="M40 92 Q32 112 34 128 L66 128 Q68 112 60 92" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
+                <ellipse cx="50" cy="128" rx="18" ry="10" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
+                <!-- Subtle bone lines -->
+                <line x1="45" y1="100" x2="46" y2="122" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
+                <line x1="55" y1="100" x2="54" y2="122" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
             </svg>
         </div>
 
