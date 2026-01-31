@@ -21,18 +21,24 @@
         </header>
 
         <div class="joint-container">
-            <svg class="joint-svg" id="jointDiagram" viewBox="0 0 100 160">
+            <svg class="joint-svg" id="jointDiagram" viewBox="0 0 120 180">
                 <defs>
                     <!-- Bone gradient -->
                     <linearGradient id="boneGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#e0dcd5"/>
-                        <stop offset="50%" stop-color="#f5f2ed"/>
+                        <stop offset="0%" stop-color="#e8e4dc"/>
+                        <stop offset="30%" stop-color="#f5f2ed"/>
+                        <stop offset="70%" stop-color="#f5f2ed"/>
                         <stop offset="100%" stop-color="#d5d0c8"/>
                     </linearGradient>
+                    <!-- Bone end gradient (for condyles) -->
+                    <radialGradient id="boneEndGrad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#f5f2ed"/>
+                        <stop offset="100%" stop-color="#e0dcd5"/>
+                    </radialGradient>
                     <!-- Cartilage gradient -->
                     <linearGradient id="cartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#5ba3c0"/>
-                        <stop offset="100%" stop-color="#3d8eb0"/>
+                        <stop offset="0%" stop-color="#7ec8e3"/>
+                        <stop offset="100%" stop-color="#5ba3c0"/>
                     </linearGradient>
                     <!-- Synovial fluid gradient (healthy) -->
                     <radialGradient id="fluidGrad" cx="50%" cy="50%" r="50%">
@@ -53,86 +59,145 @@
                         </feMerge>
                     </filter>
                     <!-- Tendon gradient -->
-                    <linearGradient id="tendonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#d4c4b0"/>
-                        <stop offset="50%" stop-color="#e8dcc8"/>
+                    <linearGradient id="tendonGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#e8dcc8"/>
                         <stop offset="100%" stop-color="#d4c4b0"/>
                     </linearGradient>
                     <!-- Ligament gradient -->
-                    <linearGradient id="ligamentGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#b8a890"/>
-                        <stop offset="100%" stop-color="#a09080"/>
+                    <linearGradient id="ligamentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#c8d8e8"/>
+                        <stop offset="50%" stop-color="#b0c8d8"/>
+                        <stop offset="100%" stop-color="#c8d8e8"/>
                     </linearGradient>
+                    <!-- Patella gradient -->
+                    <radialGradient id="patellaGrad" cx="30%" cy="30%" r="70%">
+                        <stop offset="0%" stop-color="#f5f2ed"/>
+                        <stop offset="100%" stop-color="#d5d0c8"/>
+                    </radialGradient>
                 </defs>
 
-                <!-- Ligaments (behind bones) -->
+                <!-- Collateral Ligaments (behind everything) -->
                 <g class="joint-ligaments">
-                    <path class="ligament" d="M20 50 Q15 70 20 90" fill="none" stroke="url(#ligamentGrad)" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
-                    <path class="ligament" d="M80 50 Q85 70 80 90" fill="none" stroke="url(#ligamentGrad)" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
-                    <title>Ligaments</title>
+                    <!-- Medial Collateral Ligament (MCL) - inner side -->
+                    <path class="ligament mcl" d="M28 55 Q22 75 22 95 Q22 105 28 115"
+                          fill="none" stroke="url(#ligamentGrad)" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+                    <!-- Lateral Collateral Ligament (LCL) - outer side -->
+                    <path class="ligament lcl" d="M82 60 Q88 75 90 90 Q90 100 88 108"
+                          fill="none" stroke="url(#ligamentGrad)" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+                    <title>Collateral Ligaments</title>
                 </g>
 
-                <!-- Upper bone (femur-like) -->
+                <!-- Femur (thigh bone) -->
                 <g class="bone-upper">
-                    <ellipse cx="50" cy="12" rx="18" ry="10" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
-                    <path d="M34 12 Q32 28 40 48 L60 48 Q68 28 66 12" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
-                    <ellipse class="joint-bone" cx="50" cy="50" rx="22" ry="12" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
-                    <!-- Bone texture lines -->
-                    <line x1="46" y1="18" x2="45" y2="40" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
-                    <line x1="54" y1="18" x2="55" y2="40" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
-                    <title>Femur (Upper Bone)</title>
+                    <!-- Femoral shaft -->
+                    <path d="M45 5 L42 45 Q40 55 38 60 L72 60 Q70 55 68 45 L65 5"
+                          fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1"/>
+                    <!-- Femoral condyles (rounded ends) -->
+                    <ellipse class="joint-bone" cx="40" cy="68" rx="14" ry="12" fill="url(#boneEndGrad)" stroke="#a89f90" stroke-width="1"/>
+                    <ellipse class="joint-bone" cx="70" cy="68" rx="14" ry="12" fill="url(#boneEndGrad)" stroke="#a89f90" stroke-width="1"/>
+                    <!-- Intercondylar notch (gap between condyles) -->
+                    <path d="M48 62 Q55 72 62 62" fill="var(--bg-secondary, #1a1a2e)" stroke="none"/>
+                    <title>Femur</title>
                 </g>
 
-                <!-- Upper cartilage -->
+                <!-- Cartilage on femoral condyles -->
                 <g class="cartilage-upper">
-                    <ellipse class="joint-cartilage" cx="50" cy="58" rx="20" ry="4" fill="url(#cartGrad)"/>
+                    <path class="joint-cartilage" d="M28 72 Q40 82 52 72" fill="none" stroke="url(#cartGrad)" stroke-width="4" stroke-linecap="round"/>
+                    <path class="joint-cartilage" d="M58 72 Q70 82 82 72" fill="none" stroke="url(#cartGrad)" stroke-width="4" stroke-linecap="round"/>
                     <title>Articular Cartilage</title>
                 </g>
 
-                <!-- Meniscus (crescent shapes on sides) -->
+                <!-- Cruciate Ligaments (inside joint) -->
+                <g class="joint-cruciate">
+                    <!-- ACL - Anterior Cruciate Ligament -->
+                    <path class="ligament acl" d="M48 78 Q55 88 62 98"
+                          fill="none" stroke="#c8d8e8" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+                    <!-- PCL - Posterior Cruciate Ligament -->
+                    <path class="ligament pcl" d="M62 78 Q55 88 48 98"
+                          fill="none" stroke="#b8c8d8" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+                    <title>Cruciate Ligaments</title>
+                </g>
+
+                <!-- Synovial fluid (in joint space) -->
+                <ellipse class="joint-fluid" cx="55" cy="88" rx="28" ry="10" fill="url(#fluidGrad)"/>
+
+                <!-- Synovium/Joint capsule -->
+                <path class="joint-synovium" d="M22 70 Q15 88 22 106 M88 70 Q95 88 88 106"
+                      fill="none" stroke="#7ec8e3" stroke-width="2" opacity="0.5"/>
+
+                <!-- Menisci (C-shaped cartilage) -->
                 <g class="joint-meniscus">
-                    <path class="meniscus" d="M28 68 Q22 70 28 72 Q35 70 28 68" fill="#4a9cb8" opacity="0.8"/>
-                    <path class="meniscus" d="M72 68 Q78 70 72 72 Q65 70 72 68" fill="#4a9cb8" opacity="0.8"/>
+                    <!-- Medial meniscus (inner, C-shaped) -->
+                    <path class="meniscus" d="M28 85 Q22 88 28 92 Q38 88 28 85"
+                          fill="#4a9cb8" stroke="#3d8eb0" stroke-width="0.5" opacity="0.9"/>
+                    <!-- Lateral meniscus (outer, more O-shaped) -->
+                    <path class="meniscus" d="M82 85 Q88 88 82 92 Q72 88 82 85"
+                          fill="#4a9cb8" stroke="#3d8eb0" stroke-width="0.5" opacity="0.9"/>
                     <title>Meniscus</title>
                 </g>
 
-                <!-- Synovial fluid (changes with inflammation) -->
-                <ellipse class="joint-fluid" cx="50" cy="70" rx="22" ry="8" fill="url(#fluidGrad)"/>
-
-                <!-- Synovium/Joint capsule (inflames!) -->
-                <ellipse class="joint-synovium" cx="50" cy="70" rx="26" ry="12" fill="none" stroke="#7ec8e3" stroke-width="2" opacity="0.5"/>
-
-                <!-- Lower cartilage -->
+                <!-- Tibial cartilage -->
                 <g class="cartilage-lower">
-                    <ellipse class="joint-cartilage" cx="50" cy="82" rx="20" ry="4" fill="url(#cartGrad)"/>
+                    <path class="joint-cartilage" d="M26 95 Q40 100 55 95 Q70 100 84 95"
+                          fill="none" stroke="url(#cartGrad)" stroke-width="3" stroke-linecap="round"/>
                     <title>Articular Cartilage</title>
                 </g>
 
-                <!-- Lower bone (tibia-like) -->
+                <!-- Tibia (shin bone) -->
                 <g class="bone-lower">
-                    <ellipse class="joint-bone" cx="50" cy="90" rx="22" ry="12" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
-                    <path d="M40 92 Q32 112 34 138 L66 138 Q68 112 60 92" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
-                    <ellipse cx="50" cy="138" rx="18" ry="10" fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1.5"/>
-                    <!-- Bone texture lines -->
-                    <line x1="45" y1="100" x2="46" y2="130" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
-                    <line x1="55" y1="100" x2="54" y2="130" stroke="#c5beb0" stroke-width="1" opacity="0.5"/>
-                    <title>Tibia (Lower Bone)</title>
+                    <!-- Tibial plateau -->
+                    <path class="joint-bone" d="M24 98 Q35 95 55 98 Q75 95 86 98 L86 108 Q55 112 24 108 Z"
+                          fill="url(#boneEndGrad)" stroke="#a89f90" stroke-width="1"/>
+                    <!-- Tibial shaft -->
+                    <path d="M28 108 L32 170 L68 170 L72 108"
+                          fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1"/>
+                    <!-- Tibial tuberosity (bump for patellar tendon) -->
+                    <ellipse cx="50" cy="115" rx="6" ry="4" fill="url(#boneEndGrad)" stroke="#a89f90" stroke-width="0.5"/>
+                    <title>Tibia</title>
                 </g>
 
-                <!-- Tendons (on sides, connecting to muscles) -->
+                <!-- Fibula (smaller outer bone) -->
+                <g class="bone-fibula">
+                    <!-- Fibular head -->
+                    <ellipse cx="92" cy="105" rx="6" ry="5" fill="url(#boneEndGrad)" stroke="#a89f90" stroke-width="1"/>
+                    <!-- Fibular shaft -->
+                    <path d="M90 110 L88 170 L96 170 L94 110"
+                          fill="url(#boneGrad)" stroke="#a89f90" stroke-width="1"/>
+                    <title>Fibula</title>
+                </g>
+
+                <!-- Quadriceps tendon (above patella) -->
                 <g class="joint-tendons">
-                    <path class="tendon" d="M15 30 Q10 50 12 70 Q10 90 15 110" fill="none" stroke="url(#tendonGrad)" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
-                    <path class="tendon" d="M85 30 Q90 50 88 70 Q90 90 85 110" fill="none" stroke="url(#tendonGrad)" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
-                    <title>Tendons</title>
+                    <path class="tendon" d="M45 5 Q50 20 55 35 Q50 20 65 5"
+                          fill="url(#tendonGrad)" stroke="#c5beb0" stroke-width="0.5" opacity="0.7"/>
+                    <title>Quadriceps Tendon</title>
                 </g>
 
-                <!-- Hover labels (hidden by default, shown on hover via CSS) -->
+                <!-- Patella (kneecap) -->
+                <g class="bone-patella">
+                    <ellipse cx="55" cy="55" rx="12" ry="15" fill="url(#patellaGrad)" stroke="#a89f90" stroke-width="1.5"/>
+                    <!-- Patella cartilage (back) -->
+                    <path class="joint-cartilage" d="M46 60 Q55 68 64 60" fill="none" stroke="url(#cartGrad)" stroke-width="2" opacity="0.6"/>
+                    <title>Patella (Kneecap)</title>
+                </g>
+
+                <!-- Patellar tendon (below patella) -->
+                <g class="joint-tendons">
+                    <path class="tendon patellar-tendon" d="M48 68 Q50 90 50 115 M62 68 Q60 90 50 115"
+                          fill="none" stroke="url(#tendonGrad)" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+                    <title>Patellar Tendon</title>
+                </g>
+
+                <!-- Hover labels -->
                 <g class="joint-labels" opacity="0">
-                    <text x="50" y="8" text-anchor="middle" font-size="6" fill="var(--text-primary)">Bone</text>
-                    <text x="50" y="60" text-anchor="middle" font-size="5" fill="var(--text-primary)">Cartilage</text>
-                    <text x="50" y="72" text-anchor="middle" font-size="5" fill="var(--text-primary)">Synovium</text>
-                    <text x="12" y="70" text-anchor="middle" font-size="5" fill="var(--text-primary)">Tendon</text>
-                    <text x="22" y="60" text-anchor="middle" font-size="5" fill="var(--text-primary)">Ligament</text>
+                    <text x="55" y="25" text-anchor="middle" font-size="5" fill="var(--text-primary)">Femur</text>
+                    <text x="55" y="50" text-anchor="middle" font-size="5" fill="var(--text-primary)">Patella</text>
+                    <text x="12" y="85" text-anchor="middle" font-size="4" fill="var(--text-primary)">MCL</text>
+                    <text x="100" y="85" text-anchor="middle" font-size="4" fill="var(--text-primary)">LCL</text>
+                    <text x="55" y="88" text-anchor="middle" font-size="4" fill="var(--text-primary)">ACL/PCL</text>
+                    <text x="22" y="92" text-anchor="middle" font-size="4" fill="var(--text-primary)">Meniscus</text>
+                    <text x="50" y="140" text-anchor="middle" font-size="5" fill="var(--text-primary)">Tibia</text>
+                    <text x="92" y="140" text-anchor="middle" font-size="4" fill="var(--text-primary)">Fibula</text>
                 </g>
             </svg>
         </div>
