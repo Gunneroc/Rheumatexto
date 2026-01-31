@@ -343,6 +343,10 @@
             text-transform: uppercase;
         }
 
+        .history-word.hint-word::before {
+            content: '💡 ';
+        }
+
         .history-rank {
             font-weight: bold;
             padding: 4px 12px;
@@ -358,8 +362,6 @@
 
         /* Give Up Button */
         .give-up-btn {
-            display: block;
-            margin: 20px auto;
             padding: 10px 20px;
             background: transparent;
             border: 1px solid var(--text-secondary);
@@ -372,6 +374,54 @@
         .give-up-btn:hover {
             border-color: var(--accent-red);
             color: var(--accent-red);
+        }
+
+        /* Action Buttons Container */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px auto;
+        }
+
+        .hint-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+            border: none;
+            border-radius: 8px;
+            color: #333;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .hint-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 15px rgba(240, 200, 8, 0.4);
+        }
+
+        .hint-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .hint-count {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        /* Autocorrect notification */
+        .autocorrect-msg {
+            text-align: center;
+            color: var(--accent-blue);
+            font-size: 0.85rem;
+            font-style: italic;
+            min-height: 20px;
+            margin-top: 5px;
         }
 
         /* Modals */
@@ -724,6 +774,7 @@
             <button class="submit-btn" id="submitBtn">Guess</button>
         </div>
         <div class="error-msg" id="errorMsg"></div>
+        <div class="autocorrect-msg" id="autocorrectMsg"></div>
 
         <div class="guess-count" id="guessCount">Guesses: 0</div>
 
@@ -735,7 +786,11 @@
             <ul class="history-list" id="historyList"></ul>
         </div>
 
-        <button class="give-up-btn" id="giveUpBtn">Give Up</button>
+        <div class="action-buttons">
+            <button class="hint-btn" id="hintBtn">💡 Get Hint</button>
+            <button class="give-up-btn" id="giveUpBtn">Give Up</button>
+        </div>
+        <div class="hint-count" id="hintCount">Hints used: 0/3</div>
     </div>
 
     <!-- Help Modal -->
@@ -764,7 +819,13 @@
                 <p>3. Use the hints to guide your next guess</p>
                 <p>4. Win by finding the exact word (Rank 1)!</p>
 
-                <h3>💡 Tips</h3>
+                <h3>💡 Hints</h3>
+                <p>Stuck? Use up to 3 hints per game! Each hint reveals a word that's closer to the answer than your current best guess.</p>
+
+                <h3>✨ Autocorrect</h3>
+                <p>The game recognizes common variations like plurals (joints → joint) and will autocorrect your guess automatically.</p>
+
+                <h3>🩺 Tips</h3>
                 <p>Think about rheumatology conditions, treatments, anatomy, lab tests, and doctor life!</p>
             </div>
         </div>
@@ -1439,8 +1500,136 @@
             bestRank: Infinity,
             gameOver: false,
             gameWon: false,
-            hardMode: false
+            hardMode: false,
+            hintsUsed: 0,
+            maxHints: 3
         };
+
+        // ==================== AUTOCORRECT ====================
+        // Normalize words to handle plurals and common variations
+        function normalizeWord(word) {
+            const originalWord = word.toLowerCase().trim();
+
+            // Check if the exact word exists first
+            const rankings = wordRankings[gameState.targetWord];
+            if (rankings && rankings[originalWord] !== undefined) {
+                return { normalized: originalWord, wasAutocorrected: false };
+            }
+
+            // Check all target word rankings for the exact word
+            for (const target of targetWords) {
+                if (wordRankings[target][originalWord] !== undefined) {
+                    return { normalized: originalWord, wasAutocorrected: false };
+                }
+            }
+
+            // Try to find the base form
+            let candidates = [];
+
+            // Remove common plural endings
+            if (originalWord.endsWith('ies') && originalWord.length > 3) {
+                candidates.push(originalWord.slice(0, -3) + 'y'); // candies -> candy
+            }
+            if (originalWord.endsWith('es') && originalWord.length > 2) {
+                candidates.push(originalWord.slice(0, -2)); // boxes -> box
+                candidates.push(originalWord.slice(0, -1)); // cases -> case
+            }
+            if (originalWord.endsWith('s') && originalWord.length > 1) {
+                candidates.push(originalWord.slice(0, -1)); // joints -> joint
+            }
+
+            // Remove common verb endings
+            if (originalWord.endsWith('ing') && originalWord.length > 4) {
+                candidates.push(originalWord.slice(0, -3)); // charting -> chart (but we have charting)
+                candidates.push(originalWord.slice(0, -3) + 'e'); // typing -> type
+            }
+            if (originalWord.endsWith('ed') && originalWord.length > 3) {
+                candidates.push(originalWord.slice(0, -2)); // inflamed -> inflam (not useful)
+                candidates.push(originalWord.slice(0, -1)); // tired is base form
+                candidates.push(originalWord.slice(0, -2) + 'e'); // diagnosed -> diagnose
+            }
+
+            // Handle -tion -> -te variations
+            if (originalWord.endsWith('tion') && originalWord.length > 4) {
+                candidates.push(originalWord.slice(0, -4) + 'te'); // inflammation stays, but inflame
+            }
+
+            // Common misspellings/variations
+            const commonVariations = {
+                'joints': 'joint',
+                'bones': 'bone',
+                'tendons': 'tendon',
+                'steroids': 'steroid',
+                'antibodies': 'antibody',
+                'biopsies': 'biopsy',
+                'diagnoses': 'diagnosis',
+                'infusions': 'infusion',
+                'clinics': 'clinic',
+                'pagers': 'pager',
+                'coffees': 'coffee',
+                'flares': 'flare',
+                'rashes': 'rash',
+                'ulcers': 'ulcer',
+                'symptoms': 'symptom',
+                'treatments': 'treatment',
+                'medications': 'medication',
+                'injections': 'injection',
+                'patients': 'patient',
+                'doctors': 'doctor',
+                'hospitals': 'hospital',
+                'diseases': 'disease',
+                'conditions': 'condition',
+                'autoimmunity': 'autoimmune',
+                'inflammatory': 'inflammation',
+                'arthritic': 'arthritis',
+                'inflamed': 'inflammation',
+                'swells': 'swollen',
+                'swell': 'swollen',
+                'swelling': 'swollen',
+                'fatigued': 'fatigue',
+                'tiredness': 'tired',
+                'exhausted': 'tired',
+                'sleepy': 'tired',
+                'diagnosed': 'diagnosis',
+                'diagnosing': 'diagnosis',
+                'treating': 'treatment',
+                'treated': 'treatment'
+            };
+
+            if (commonVariations[originalWord]) {
+                candidates.unshift(commonVariations[originalWord]); // Prioritize known variations
+            }
+
+            // Check each candidate
+            for (const candidate of candidates) {
+                // Check current target word rankings
+                if (rankings && rankings[candidate] !== undefined) {
+                    return { normalized: candidate, wasAutocorrected: true, original: originalWord };
+                }
+
+                // Check all target word rankings
+                for (const target of targetWords) {
+                    if (wordRankings[target][candidate] !== undefined) {
+                        return { normalized: candidate, wasAutocorrected: true, original: originalWord };
+                    }
+                }
+            }
+
+            // Check if it's in common words
+            if (commonWords.includes(originalWord)) {
+                return { normalized: originalWord, wasAutocorrected: false };
+            }
+
+            // Check candidates against common words
+            for (const candidate of candidates) {
+                if (commonWords.includes(candidate)) {
+                    return { normalized: candidate, wasAutocorrected: true, original: originalWord };
+                }
+            }
+
+            // No match found
+            return { normalized: originalWord, wasAutocorrected: false };
+        }
 
         let stats = {
             played: 0,
@@ -1467,6 +1656,7 @@
             gameState.bestRank = Infinity;
             gameState.gameOver = false;
             gameState.gameWon = false;
+            gameState.hintsUsed = 0;
 
             // Reset UI
             document.getElementById('historyList').innerHTML = '';
@@ -1478,8 +1668,14 @@
             document.getElementById('guessInput').value = '';
             document.getElementById('guessInput').disabled = false;
             document.getElementById('submitBtn').disabled = false;
-            document.getElementById('giveUpBtn').style.display = 'block';
+            document.getElementById('giveUpBtn').style.display = 'inline-block';
             document.getElementById('errorMsg').textContent = '';
+            document.getElementById('autocorrectMsg').textContent = '';
+
+            // Reset hint UI
+            document.getElementById('hintBtn').disabled = false;
+            document.getElementById('hintBtn').style.display = 'inline-block';
+            updateHintCount();
 
             // Reset joint diagram
             updateJointDiagram(Infinity);
@@ -1545,6 +1741,9 @@
             // Give up
             document.getElementById('giveUpBtn').addEventListener('click', giveUp);
 
+            // Hint button
+            document.getElementById('hintBtn').addEventListener('click', useHint);
+
             // New game buttons
             document.getElementById('newGameBtn').addEventListener('click', () => {
                 closeModal('winModal');
@@ -1573,13 +1772,17 @@
             if (gameState.gameOver) return;
 
             const input = document.getElementById('guessInput');
-            const guess = input.value.trim().toLowerCase();
+            const rawGuess = input.value.trim().toLowerCase();
 
-            if (!guess) return;
+            if (!rawGuess) return;
 
-            // Check if already guessed
-            if (gameState.guesses.find(g => g.word === guess)) {
+            // Apply autocorrect
+            const { normalized: guess, wasAutocorrected, original } = normalizeWord(rawGuess);
+
+            // Check if already guessed (check both original and normalized)
+            if (gameState.guesses.find(g => g.word === guess || g.word === rawGuess)) {
                 showError('Already guessed!');
+                showAutocorrect('');
                 input.value = '';
                 return;
             }
@@ -1589,12 +1792,20 @@
 
             if (rank === -1) {
                 showError('Word not recognized');
+                showAutocorrect('');
                 return;
             }
 
             // Clear error and input
             showError('');
             input.value = '';
+
+            // Show autocorrect message if applicable
+            if (wasAutocorrected) {
+                showAutocorrect(`"${original}" → "${guess}"`);
+            } else {
+                showAutocorrect('');
+            }
 
             // Add guess
             const guessData = { word: guess, rank: rank };
@@ -1650,8 +1861,9 @@
             if (isNewBest && gameState.guesses.length > 1) {
                 item.classList.add('new-best');
             }
+            const hintClass = guessData.isHint ? 'hint-word' : '';
             item.innerHTML = `
-                <span class="history-word">${guessData.word}</span>
+                <span class="history-word ${hintClass}">${guessData.word}</span>
                 <span class="history-rank">${guessData.rank}</span>
             `;
 
@@ -1749,6 +1961,108 @@
             document.getElementById('errorMsg').textContent = msg;
         }
 
+        function showAutocorrect(msg) {
+            document.getElementById('autocorrectMsg').textContent = msg;
+        }
+
+        // ==================== HINT SYSTEM ====================
+        function getHintWord() {
+            if (gameState.hintsUsed >= gameState.maxHints) return null;
+            if (gameState.gameOver) return null;
+
+            const rankings = wordRankings[gameState.targetWord];
+            const guessedWords = new Set(gameState.guesses.map(g => g.word));
+
+            // Get all words sorted by rank
+            const sortedWords = Object.entries(rankings)
+                .filter(([word, rank]) => !guessedWords.has(word) && word !== gameState.targetWord)
+                .sort((a, b) => a[1] - b[1]);
+
+            if (sortedWords.length === 0) return null;
+
+            // Strategy: Give a word that's roughly halfway between current best and the answer
+            // Or if no guesses yet, give something around rank 50-100
+            let targetRank;
+
+            if (gameState.bestRank === Infinity) {
+                // No guesses yet - give a word around rank 50-100
+                targetRank = 50 + Math.floor(Math.random() * 50);
+            } else if (gameState.bestRank <= 10) {
+                // Very close - give something just a bit closer (rank 2-5)
+                targetRank = 2 + Math.floor(Math.random() * 4);
+            } else if (gameState.bestRank <= 50) {
+                // Close - give something halfway
+                targetRank = Math.floor(gameState.bestRank / 2);
+            } else {
+                // Far away - give something roughly halfway to the answer
+                targetRank = Math.floor(gameState.bestRank / 2);
+            }
+
+            // Find the word closest to our target rank
+            let bestWord = null;
+            let bestDiff = Infinity;
+
+            for (const [word, rank] of sortedWords) {
+                const diff = Math.abs(rank - targetRank);
+                if (diff < bestDiff) {
+                    bestDiff = diff;
+                    bestWord = { word, rank };
+                }
+            }
+
+            return bestWord;
+        }
+
+        function useHint() {
+            if (gameState.gameOver) return;
+            if (gameState.hintsUsed >= gameState.maxHints) {
+                showError('No hints remaining!');
+                return;
+            }
+
+            const hintWord = getHintWord();
+            if (!hintWord) {
+                showError('No hint available');
+                return;
+            }
+
+            gameState.hintsUsed++;
+            updateHintCount();
+
+            // Add the hint word as a guess (marked as hint)
+            const guessData = { word: hintWord.word, rank: hintWord.rank, isHint: true };
+            gameState.guesses.push(guessData);
+
+            // Check if new best
+            const isNewBest = hintWord.rank < gameState.bestRank;
+            if (isNewBest) {
+                gameState.bestRank = hintWord.rank;
+            }
+
+            // Update UI
+            showError('');
+            showAutocorrect(`💡 Hint: "${hintWord.word.toUpperCase()}"`);
+            updateGuessDisplay(guessData, isNewBest);
+            updateMeter(hintWord.rank);
+            updateJointDiagram(hintWord.rank);
+            updateGuessCount();
+
+            // Check for win (unlikely but possible)
+            if (hintWord.rank === 1) {
+                handleWin();
+            }
+
+            // Disable hint button if no hints left
+            if (gameState.hintsUsed >= gameState.maxHints) {
+                document.getElementById('hintBtn').disabled = true;
+            }
+        }
+
+        function updateHintCount() {
+            const remaining = gameState.maxHints - gameState.hintsUsed;
+            document.getElementById('hintCount').textContent = `Hints used: ${gameState.hintsUsed}/${gameState.maxHints}`;
+        }
+
         // ==================== WIN/LOSE ====================
         function handleWin() {
             gameState.gameOver = true;
@@ -1771,6 +2085,7 @@
             document.getElementById('guessInput').disabled = true;
             document.getElementById('submitBtn').disabled = true;
             document.getElementById('giveUpBtn').style.display = 'none';
+            document.getElementById('hintBtn').style.display = 'none';
 
             // Show confetti
             createConfetti();
@@ -1797,6 +2112,7 @@
             document.getElementById('guessInput').disabled = true;
             document.getElementById('submitBtn').disabled = true;
             document.getElementById('giveUpBtn').style.display = 'none';
+            document.getElementById('hintBtn').style.display = 'none';
 
             // Show reveal modal
             document.getElementById('revealWord').textContent = gameState.targetWord.toUpperCase();
